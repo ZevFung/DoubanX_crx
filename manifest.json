@@ -1,0 +1,40 @@
+{
+    "name": "DoubanX",
+    "description": "",
+    "homepage_url": "https://github.com/wange1228/xdouban_crx",
+    "version": "0.1",
+    "icons": {
+        "16": "img/douban_x.png",
+        "48": "img/douban_x.png",
+        "128": "img/douban_x.png"
+    },
+    "browser_action": {
+        "default_icon": "img/douban_x.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://film.qq.com/*",
+                "http://v.qq.com/*",
+                "http://movie.youku.com/*",
+                "http://tv.youku.com/*",
+                "http://movie.tudou.com/*",
+                "http://tv.tudou.com/*",
+                "http://www.iqiyi.com/*",
+                "http://www.amazon.cn/*"
+            ],
+            "css": ["css/douban_x.css"],
+            "js": [
+                "js/lib/zepto.min.js",
+                "js/base/template.js",
+                "js/base/douban_x.js",
+                "js/x/qq.js",
+                "js/x/youku.js",
+                "js/x/tudou.js",
+                "js/x/iqiyi.js",
+                "js/x/amazon.js"
+            ]
+        }
+    ],
+    "manifest_version": 2
+}
