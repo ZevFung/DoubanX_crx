@@ -21,18 +21,21 @@
                 "http://movie.tudou.com/*",
                 "http://tv.tudou.com/*",
                 "http://www.iqiyi.com/*",
+                "http://movie.le.com/*",
+                "http://tv.le.com/*",
                 "http://www.amazon.cn/*"
             ],
             "css": ["css/douban_x.css"],
             "js": [
                 "js/lib/zepto.min.js",
-                "js/base/template.js",
-                "js/base/douban_x.js",
-                "js/x/qq.js",
-                "js/x/youku.js",
-                "js/x/tudou.js",
-                "js/x/iqiyi.js",
-                "js/x/amazon.js"
+                "js/view/template.js",
+                "js/model/douban_x.js",
+                "js/controller/qq.js",
+                "js/controller/youku.js",
+                "js/controller/tudou.js",
+                "js/controller/iqiyi.js",
+                "js/controller/leshi.js",
+                "js/controller/amazon.js"
             ]
         }
     ],
