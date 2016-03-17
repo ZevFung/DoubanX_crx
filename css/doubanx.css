@@ -28,3 +28,9 @@ qq
 youku
  */
 .doubanx_youku .base{height:auto}
+
+/*
+iqiyi
+ */
+.doubanx_iqiyi .x_film{display:inline-block;vertical-align:middle;padding:0;margin-right:10px;}
+.doubanx_iqiyi .playNums{display:inline-block;vertical-align:middle;}
