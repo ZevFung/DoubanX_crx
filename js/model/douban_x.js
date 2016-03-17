@@ -4,7 +4,7 @@ class DoubanX {
     constructor(options) {
         this.name = options.name || '';
         this.type = options.type || '';
-        this.api = 'http://xdouban.wange.im/api/get_rate';
+        this.api = 'http://doubanx.wange.im/get_rate';
         // localStorage.clear();
     }
 
