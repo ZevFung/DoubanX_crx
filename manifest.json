@@ -1,15 +1,16 @@
 {
     "name": "DoubanX",
-    "description": "",
-    "homepage_url": "https://github.com/wange1228/xdouban_crx",
-    "version": "0.1",
+    "description": "在各大视频网站上显示电影或电视剧对应的豆瓣评分",
+    "homepage_url": "https://github.com/wange1228/doubanx_crx",
+    "version": "0.2",
+    "manifest_version": 2,
     "icons": {
-        "16": "img/douban_x.png",
-        "48": "img/douban_x.png",
-        "128": "img/douban_x.png"
+        "16": "img/doubanx.png",
+        "48": "img/doubanx.png",
+        "128": "img/doubanx.png"
     },
-    "browser_action": {
-        "default_icon": "img/douban_x.png"
+    "page_action": {
+        "default_icon": "img/doubanx.png"
     },
     "content_scripts": [
         {
@@ -25,11 +26,11 @@
                 "http://tv.le.com/*",
                 "http://www.amazon.cn/*"
             ],
-            "css": ["css/douban_x.css"],
+            "css": ["css/doubanx.css"],
             "js": [
                 "js/lib/zepto.min.js",
                 "js/view/template.js",
-                "js/model/douban_x.js",
+                "js/model/doubanx.js",
                 "js/controller/qq.js",
                 "js/controller/youku.js",
                 "js/controller/tudou.js",
@@ -38,6 +39,5 @@
                 "js/controller/amazon.js"
             ]
         }
-    ],
-    "manifest_version": 2
+    ]
 }
