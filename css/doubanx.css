@@ -1,3 +1,6 @@
+/*
+Public
+ */
 .bigstar50,.bigstar45,.bigstar40,.bigstar35,.bigstar30,.bigstar25,.bigstar20,.bigstar15,.bigstar10,.bigstar05,.bigstar00{display:inline-block;*display:inline;zoom:1;background:url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) no-repeat;background:-webkit-image-set(url(https://img3.doubanio.com/f/shire/680a4bc4c384199245b080c7104da5be8ed717d3/pics/rating_icons/ic_rating_m.png) 1x, url(https://img3.doubanio.com/f/shire/ee7f53d76c3f8ed4991bdbafdb9b2c90c0aedfef/pics/rating_icons/ic_rating_m@2x.png) 2x) no-repeat;width:75px;height:15px;margin:1px 0 0 0;overflow:hidden}
 .bigstar50{background-position:0 0px}.bigstar45{background-position:0 -15px}.bigstar40{background-position:0 -30px}.bigstar35{background-position:0 -45px}.bigstar30{background-position:0 -60px}.bigstar25{background-position:0 -75px}.bigstar20{background-position:0 -90px}.bigstar15{background-position:0 -105px}.bigstar10{background-position:0 -120px}.bigstar05{background-position:0 -135px}.bigstar00{background-position:0 -150px}
 .x_list{height:auto !important;}
@@ -13,6 +16,15 @@
 .sort_douban .sort_list{float:left;}
 .sort_wrap .sort_douban li a:hover,
 .sort_wrap .sort_douban li a.sort_douban_curr{background:#071;color:#fff;}
+
+/*
+qq
+ */
 .pager_s{display:none !important;}
 .mod_player_head{height:auto !important;margin-bottom:0 !important;}
 .mod_player_title{margin-bottom:5px !important;}
+
+/*
+youku
+ */
+.doubanx_youku .base{height:auto}

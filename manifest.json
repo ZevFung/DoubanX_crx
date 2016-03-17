@@ -17,8 +17,7 @@
             "matches": [
                 "http://film.qq.com/*",
                 "http://v.qq.com/*",
-                "http://movie.youku.com/*",
-                "http://tv.youku.com/*",
+                "http://v.youku.com/*",
                 "http://movie.tudou.com/*",
                 "http://tv.tudou.com/*",
                 "http://www.iqiyi.com/*",
