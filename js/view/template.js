@@ -29,15 +29,4 @@ class Template {
                '<span class="x_item">评分人数<i>' + Template.toThousands(data.vote) + '</i></span>' +
                '<span class="x_item">豆瓣评星<i><span class="bigstar' + data.star + '"></span>' + '</i></span>';
     }
-
-    typeC() {
-        return '<div class="sort_douban">' +
-               '    <strong>本页按豆瓣排序</strong>' +
-               '    <ul class="sort_list">' +
-               '        <li><a data-sort="average" href="javascript:;">评分</a></li>' +
-               '        <li><a data-sort="vote" href="javascript:;">人数</a></li>' +
-               '        <li><a data-sort="star" href="javascript:;">评星</a></li>' +
-               '    </ul>' +
-               '</div>';
-    }
 }
