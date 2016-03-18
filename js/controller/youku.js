@@ -2,11 +2,11 @@
 
 class YouKu {
     constructor() {
-        this.isMovie = window.location.host === 'v.youku.com';
+        this.isYouku = window.location.host === 'v.youku.com';
     }
 
     main() {
-        if (this.isMovie) {
+        if (this.isYouku) {
             new DoubanX({
                 name: $('h1.title a').text(),
                 type: 'movie'
