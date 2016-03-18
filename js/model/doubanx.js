@@ -18,6 +18,16 @@ class DoubanX {
     };
 
     /**
+     * 格式化数据
+     */
+    static formatData(data) {
+        data.rate = JSON.parse(data.rate);
+        data.time = Date.parse(data.time);
+
+        return data;
+    }
+
+    /**
      * 实时获取豆瓣信息
      */
     getRateOnline(callback) {
@@ -34,7 +44,7 @@ class DoubanX {
             dataType: 'json',
             success: (data) => {
                 if (data.ret === 0) {
-                    callback(data.data);
+                    callback(DoubanX.formatData(data.data));
                     localStorage.setItem(name, JSON.stringify(data.data));
                 }
             }
