@@ -10,16 +10,10 @@ class Iqiyi {
 
     main() {
         if (this.isMovie && this.page.video) {
-            let iqiyi = new DoubanX({
+            new DoubanX({
                 name: $('#widget-videotitle').text(),
                 type: 'movie'
-            });
-            iqiyi.getRate((data) => {
-                $('body').addClass('doubanx_iqiyi');
-                $('.mod-source').prepend(
-                    new Template(data).typeA()
-                );
-            });
+            }).getRate();
         }
 
     }

@@ -14,57 +14,32 @@ class QQ {
     }
 
     main() {
-        let qq = null;
-
         if (this.isFilm && this.page.movie) {
-            qq = new DoubanX({
+            new DoubanX({
                 name: $('.player_title').text(),
                 type: 'movie'
-            });
-            qq.getRate((data) => {
-                $('.douban').remove();
-                $('.player_title').after(
-                    new Template(data).typeA()
-                );
-            });
+            }).getRate();
         }
 
         if (this.isFilm && this.page.tv) {
-            qq = new DoubanX({
+            new DoubanX({
                 name: $('.album_title').text(),
                 type: 'movie'
-            });
-            qq.getRate((data) => {
-                $('.douban').remove();
-                $('.film_name').after(
-                    new Template(data).typeA()
-                );
-            });
+            }).getRate();
         }
 
         if (this.isVideo && this.page.tv) {
-            qq = new DoubanX({
+            new DoubanX({
                 name: $('h3.title_inner').text(),
                 type: 'movie'
-            });
-            qq.getRate((data) => {
-                $('.douban').remove();
-                $('.mod_player_head').after(
-                    new Template(data).typeA()
-                );
-            });
+            }).getRate();
         }
 
         if (this.isVideo && this.page.movie) {
-            qq = new DoubanX({
+            new DoubanX({
                 name: $('.title_text').text(),
                 type: 'movie'
-            });
-            qq.getRate((data) => {
-                $('.mod_player_head').append(
-                    new Template(data).typeA()
-                );
-            });
+            }).getRate();
         }
     }
 }

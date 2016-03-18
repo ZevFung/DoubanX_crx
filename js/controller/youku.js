@@ -7,16 +7,10 @@ class YouKu {
 
     main() {
         if (this.isMovie) {
-            let youku = new DoubanX({
+            new DoubanX({
                 name: $('h1.title a').text(),
                 type: 'movie'
-            });
-            youku.getRate((data) => {
-                $('body').addClass('doubanx_youku');
-                $('h1.title').after(
-                    new Template(data).typeA()
-                );
-            });
+            }).getRate();
         }
 
     }

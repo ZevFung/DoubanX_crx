@@ -72,9 +72,16 @@ class DoubanX {
     getRate(callback) {
         const that = this;
         const name = that.name;
-        const inCache = that.getRateOffline(callback);
+        const inCache = that.getRateOffline(callback || that.defaultCallback);
         if (!inCache) {
-            that.getRateOnline(callback);
+            that.getRateOnline(callback || that.defaultCallback);
         }
+    }
+
+    /**
+     * 默认回调方法
+     */
+    defaultCallback(data) {
+        $('body').append(new Template(data).typeA());
     }
 }
