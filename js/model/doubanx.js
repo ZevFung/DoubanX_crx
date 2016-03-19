@@ -86,7 +86,7 @@ class DoubanX {
             that.getRateOnline(callback || that.defaultCallback);
         }
 
-        // 缓存时间超过5天的重新拉取豆瓣最新数据
+        // 超过缓存时间重新拉取豆瓣最新数据
         if (that.time) {
             const now = Date.parse(new Date);
             const gap = (now - that.time) / 1000 / 60 / 60 / 24;
