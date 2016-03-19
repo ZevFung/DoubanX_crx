@@ -1,8 +1,8 @@
 {
     "name": "DoubanX",
-    "description": "在各大视频网站上显示电影或电视剧对应的豆瓣评分",
+    "description": "在视频播放页以及图书详情页显示当前视频或图书在豆瓣对应的评分、评星等信息。（目前电影、电视剧支持腾讯视频、优酷、土豆、爱奇艺、乐视，图书支持亚马逊和当当网）",
     "homepage_url": "https://github.com/wange1228/doubanx_crx",
-    "version": "0.2",
+    "version": "0.3",
     "manifest_version": 2,
     "icons": {
         "16": "img/doubanx.png",
