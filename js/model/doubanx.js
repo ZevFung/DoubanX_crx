@@ -7,9 +7,22 @@ class DoubanX {
         this.force = options.force || 0;    // 是否强制更新 0否 1是
         this.time = null;   // 缓存的时间戳
         this.expire = 5;    // 缓存过期时间5天，0表示不缓存
+        this.csrfKey = 'i@wange.im';    // 防止CSRF的private key
         this.api = 'http://doubanx.wange.im/get_rate'; // 接口地址
         // localStorage.clear();
     }
+
+    static getToken(key) {
+        const timestamp = Date.parse(new Date);
+        const l = key.length;
+        let i = 0;
+        let hash = 5381;
+        for(; i < l; ++i) {
+        	hash += (hash << 5) + key.charCodeAt(i);
+        }
+
+        return hash = hash & 0x7fffffff;
+    };
 
     /**
      * 格式化标题
@@ -45,7 +58,8 @@ class DoubanX {
             data: {
                 name: DoubanX.formatName(name),
                 type: type,
-                force: force
+                force: force,
+                token: DoubanX.getToken(that.csrfKey)
             },
             type: 'post',
             dataType: 'json',
