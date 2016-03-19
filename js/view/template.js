@@ -20,7 +20,7 @@ class Template {
         $("body").on("click", "#interest_sectl .interest_close", function(ev) {
             $("#interest_sectl").remove();
         });
-        if (data.rate.length !== 0) {
+        if (data.vote > 10) {
             return `<div id="interest_sectl">
                         <a href="javascript:;" class="interest_close"></a>
                         <div class="rating_wrap clearbox">
