@@ -20,8 +20,7 @@
                 "http://v.youku.com/*",
                 "http://www.tudou.com/*",
                 "http://www.iqiyi.com/*",
-                "http://movie.le.com/*",
-                "http://tv.le.com/*",
+                "http://www.le.com/*",
                 "http://www.amazon.cn/*"
             ],
             "css": ["css/doubanx.css"],
