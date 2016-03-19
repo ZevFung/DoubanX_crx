@@ -7,9 +7,9 @@ class QQ {
         this.page = {
             video: $('#mod_player').length > 0,     // 播放页
             tv: ($('#mod_player').length > 0) &&
-            ($('.album_list li').length > 0),   // 电视剧
+                ($('.album_list li').length > 0),   // 电视剧
             movie: ($('#mod_player').length > 0) &&
-            ($('.album_list li').length === 0)  // 电影
+                ($('.album_list li').length === 0)  // 电影
         };
     }
 
