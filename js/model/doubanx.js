@@ -12,6 +12,9 @@ class DoubanX {
         // localStorage.clear();
     }
 
+    /**
+     * CSRF验证
+     */
     static getToken(key) {
         const timestamp = Date.parse(new Date);
         const l = key.length;
