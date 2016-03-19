@@ -21,7 +21,8 @@
                 "http://www.tudou.com/*",
                 "http://www.iqiyi.com/*",
                 "http://www.le.com/*",
-                "http://www.amazon.cn/*"
+                "http://www.amazon.cn/*",
+                "http://product.dangdang.com/*"
             ],
             "css": ["css/doubanx.css"],
             "js": [
@@ -33,7 +34,8 @@
                 "js/controller/tudou.js",
                 "js/controller/iqiyi.js",
                 "js/controller/leshi.js",
-                "js/controller/amazon.js"
+                "js/controller/amazon.js",
+                "js/controller/dangdang.js"
             ]
         }
     ]
