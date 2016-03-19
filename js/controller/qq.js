@@ -37,7 +37,7 @@ class QQ {
 
         if (this.isVideo && this.page.movie) {
             new DoubanX({
-                name: $('.title_text').text(),
+                name: $('#h1_title').text(),
                 type: 'movie'
             }).getRate();
         }
