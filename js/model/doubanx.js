@@ -2,9 +2,12 @@
 
 class DoubanX {
     constructor(options) {
-        this.name = options.name || '';
-        this.type = options.type || '';
-        this.api = 'http://doubanx.wange.im/get_rate';
+        this.name = options.name || '';     // 名称
+        this.type = options.type || '';     // 类型 movie/book
+        this.force = options.force || 0;    // 是否强制更新 0否 1是
+        this.time = null;   // 缓存的时间戳
+        this.expire = 5;    // 缓存过期时间5天，0表示不缓存
+        this.api = 'http://doubanx.wange.im/get_rate'; // 接口地址
         // localStorage.clear();
     }
 
@@ -34,11 +37,14 @@ class DoubanX {
         const that = this;
         const name = that.name;
         const type = that.type;
+        const force = that.force;
+
         $.ajax({
             url: that.api,
             data: {
                 name: DoubanX.formatName(name),
-                type: type
+                type: type,
+                force: force
             },
             type: 'post',
             dataType: 'json',
@@ -57,9 +63,11 @@ class DoubanX {
     getRateOffline(callback) {
         let output = false;
         if (localStorage.getItem(this.name)) {
+            const jsonObj = JSON.parse(localStorage.getItem(this.name));
             callback(
-                JSON.parse(localStorage.getItem(this.name))
+                jsonObj
             );
+            this.time = jsonObj.time;
             output = true;
         }
 
@@ -75,6 +83,16 @@ class DoubanX {
         const inCache = that.getRateOffline(callback || that.defaultCallback);
         if (!inCache) {
             that.getRateOnline(callback || that.defaultCallback);
+        }
+
+        // 缓存时间超过5天的重新拉取豆瓣最新数据
+        if (that.time) {
+            const now = Date.parse(new Date);
+            const gap = (now - that.time) / 1000 / 60 / 60 / 24;
+            if (gap >= that.expire) {
+                that.force = 1;
+                that.getRateOnline(callback || that.defaultCallback);
+            }
         }
     }
 
