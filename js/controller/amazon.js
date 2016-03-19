@@ -4,18 +4,17 @@ class Amazon {
     constructor() {
         this.isAmazon = window.location.host === 'www.amazon.cn';
         this.page = {
-            book: $.trim($('.a-list-item').eq(0).find('a').text()) === '图书'
+            book: $('#sitbLogoImg').length > 0
         }
     }
 
     main() {
         if (this.isAmazon && this.page.book) {
             new DoubanX({
-                name: $('#productTitle').text(),
+                name: $('#productTitle, #ebooksProductTitle').text(),
                 type: 'book'
             }).getRate();
         }
-
     }
 }
 
