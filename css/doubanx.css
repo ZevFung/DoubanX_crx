@@ -103,7 +103,7 @@ Public
     padding:10px 0 10px 6px
 }
 #interest_sectl .rating_right.not_showed {
-    padding:10px 0
+    padding:10px 0 0
 }
 #interest_sectl .power {
     height:10px;
