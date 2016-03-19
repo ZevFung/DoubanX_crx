@@ -16,8 +16,9 @@ class DoubanX {
      */
     static formatName(name) {
         return $.trim(name)
-                .replace('《', '').replace('》', '')
-                .replace(/(.*)?(第.*?季)/i, "$1 $2");
+                .replace('《', '').replace('》', '')  // 去掉书名号
+                .replace(/(.*)?(第.*?季)/i, "$1 $2")  // 美剧名格式化
+                .replace(/(\(.*\))/i, "");           // 去掉括号
     };
 
     /**
