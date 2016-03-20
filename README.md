@@ -18,7 +18,5 @@
 * Q: 为什么当前页面显示的豆瓣评分的链接指向的不是我看的视频和图书？  
   A: 不用怀疑，[给我提bug](https://github.com/wange1228/DoubanX_crx/issues)，我会在第一时间修复。
 
-## 写在最后
-
-* 在下对视觉的追求和设计的能力实在不成比例，以至于 LOGO 丑的不行，有哪位大侠能够出手相助赐一个 LOGO，在下感激不尽。
-* [五星好评](https://chrome.google.com/webstore/detail/doubanx/ioacifoopoldngldmbknimhhophmfbgh/reviews)哟，亲~
+## License
+Released under [MIT](http://rem.mit-license.org/)  LICENSE
