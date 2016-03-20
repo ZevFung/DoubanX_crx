@@ -15,12 +15,12 @@
     "content_scripts": [
         {
             "matches": [
-                "http://film.qq.com/*",
-                "http://v.qq.com/*",
-                "http://v.youku.com/*",
-                "http://www.tudou.com/*",
+                "http://film.qq.com/cover/*",
+                "http://v.qq.com/cover/*",
+                "http://v.youku.com/v_show/*",
+                "http://www.tudou.com/albumplay/*",
                 "http://www.iqiyi.com/*",
-                "http://www.le.com/*",
+                "http://www.le.com/ptv/vplay/*",
                 "http://www.amazon.cn/*",
                 "http://product.dangdang.com/*"
             ],

@@ -4,7 +4,9 @@ class Iqiyi {
     constructor() {
         this.isIqiyi = window.location.host === 'www.iqiyi.com';
         this.page = {
-            video: window.location.pathname.indexOf('/v_') === 0
+            video: (window.location.pathname.indexOf('/v_') === 0 ||
+                   window.location.pathname.indexOf('/dianying/') === 0) &&
+                   $('.videoArea').length !== 0
         }
     }
 
