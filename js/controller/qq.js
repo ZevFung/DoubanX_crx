@@ -1,5 +1,3 @@
-'use strict';
-
 class QQ {
     constructor() {
         this.isFilm = window.location.host === 'film.qq.com';

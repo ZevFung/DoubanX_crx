@@ -1,11 +1,9 @@
-'use strict';
-
 class JD {
     constructor() {
         this.isJD = window.location.host === 'item.jd.com';
         this.page = {
             book: $.trim($('.breadcrumb strong a').text()) === '图书'
-        }
+        };
     }
 
     main() {

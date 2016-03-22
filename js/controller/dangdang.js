@@ -1,11 +1,9 @@
-'use strict';
-
 class Dangdang {
     constructor() {
         this.isDangdang = window.location.host === 'product.dangdang.com';
         this.page = {
             book: $.trim($('.breadcrumb a').eq(0).text()) === '图书'
-        }
+        };
     }
 
     main() {

@@ -1,5 +1,3 @@
-'use strict';
-
 class Template {
     constructor(data) {
         this.data = data || {};
@@ -10,7 +8,7 @@ class Template {
      */
     static toThousands(num) {
         return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, "$1,");
-    };
+    }
 
     /**
      * 模板A

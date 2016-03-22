@@ -1,5 +1,3 @@
-'use strict';
-
 class Sohu {
     constructor() {
         this.isVideo = (window.location.host === 'tv.sohu.com') &&

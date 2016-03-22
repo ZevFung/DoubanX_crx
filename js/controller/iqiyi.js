@@ -1,5 +1,3 @@
-'use strict';
-
 class Iqiyi {
     constructor() {
         this.isIqiyi = window.location.host === 'www.iqiyi.com';
@@ -7,7 +5,7 @@ class Iqiyi {
             video: (window.location.pathname.indexOf('/v_') === 0 ||
                    window.location.pathname.indexOf('/dianying/') === 0) &&
                    $('.videoArea').length !== 0
-        }
+        };
     }
 
     main() {

@@ -1,11 +1,9 @@
-'use strict';
-
 class Leshi {
     constructor() {
         this.isLeshi = window.location.host === 'www.le.com';
         this.page = {
             video: window.location.pathname.indexOf('/ptv/vplay/') === 0
-        }
+        };
     }
 
     main() {

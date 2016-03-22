@@ -1,11 +1,9 @@
-'use strict';
-
 class Tudou {
     constructor() {
         this.isTudou = window.location.host === 'www.tudou.com';
         this.page = {
             video: window.location.pathname.indexOf('/albumplay/') === 0
-        }
+        };
     }
 
     main() {

@@ -1,5 +1,3 @@
-'use strict';
-
 class DoubanX {
     constructor(options) {
         this.name = options.name || '';     // 名称
@@ -26,7 +24,7 @@ class DoubanX {
                 .replace(/(\(.*\))/i, "")            // 去掉英文括号
                 .replace(/(.*)?(（.*）)$/i, "$1")     // 去掉中文括号里的内容
                 .replace(/(.*)?(第.*?集)/i, "$1");    // 电视剧名格式化
-    };
+    }
 
     /**
      * 格式化数据
@@ -95,7 +93,7 @@ class DoubanX {
 
         // 超过缓存时间重新拉取豆瓣最新数据
         if (that.time) {
-            const now = Date.parse(new Date);
+            const now = Date.parse(new Date());
             const gap = (now - that.time) / 1000 / 60 / 60 / 24;
             if (gap >= that.expire) {
                 that.force = 1;

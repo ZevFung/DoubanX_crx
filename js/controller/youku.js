@@ -1,12 +1,10 @@
-'use strict';
-
 class YouKu {
     constructor() {
         this.isYouku = window.location.host === 'v.youku.com';
         this.page = {
             video: window.location.pathname.indexOf('/v_show/') === 0 &&
                    $.trim($('.crumbs a').eq(0).text()) === ('电影' || '电视剧')
-        }
+        };
     }
 
     main() {

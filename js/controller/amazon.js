@@ -1,11 +1,9 @@
-'use strict';
-
 class Amazon {
     constructor() {
         this.isAmazon = window.location.host === 'www.amazon.cn';
         this.page = {
             book: $('#sitbLogoImg').length > 0
-        }
+        };
     }
 
     main() {
