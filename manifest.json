@@ -1,10 +1,10 @@
 {
     "name": "豆瓣影视图书小助手",
     "short_name": "DoubanX",
-    "description": "在视频播放页以及图书详情页显示当前视频或图书在豆瓣对应的评分、评星等信息。（目前电影、电视剧支持腾讯视频、优酷、土豆、爱奇艺、乐视，图书支持亚马逊、京东、当当网）",
+    "description": "在视频播放页以及图书详情页显示当前视频或图书在豆瓣对应的评分、评星等信息。（目前电影、电视剧支持腾讯、优酷、土豆、爱奇艺、乐视、搜狐，图书支持亚马逊、京东、当当网）",
     "homepage_url": "https://github.com/wange1228/doubanx_crx",
     "author": "i@wange.im",
-    "version": "0.5",
+    "version": "0.5.1",
     "manifest_version": 2,
     "icons": {
         "16": "img/doubanx.png",
@@ -23,6 +23,8 @@
                 "http://www.tudou.com/albumplay/*",
                 "http://www.iqiyi.com/*",
                 "http://www.le.com/ptv/vplay/*",
+                "http://tv.sohu.com/*",
+                "http://film.sohu.com/album/*",
                 "http://www.amazon.cn/*",
                 "http://product.dangdang.com/*",
                 "http://item.jd.com/*"
@@ -53,6 +55,10 @@
         {
             "matches": [ "http://www.le.com/ptv/vplay/*" ],
             "js": [ "js/controller/leshi.js" ]
+        },
+        {
+            "matches": [ "http://tv.sohu.com/*", "http://film.sohu.com/album/*" ],
+            "js": [ "js/controller/sohu.js" ]
         },
         {
             "matches": [ "http://www.amazon.cn/*" ],
