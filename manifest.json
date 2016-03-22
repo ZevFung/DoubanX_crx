@@ -4,7 +4,7 @@
     "description": "在视频播放页以及图书详情页显示当前视频或图书在豆瓣对应的评分、评星等信息。（目前电影、电视剧支持腾讯视频、优酷、土豆、爱奇艺、乐视，图书支持亚马逊、京东、当当网）",
     "homepage_url": "https://github.com/wange1228/doubanx_crx",
     "author": "i@wange.im",
-    "version": "0.4.1",
+    "version": "0.5",
     "manifest_version": 2,
     "icons": {
         "16": "img/doubanx.png",
@@ -31,16 +31,40 @@
             "js": [
                 "js/lib/zepto.min.js",
                 "js/view/template.js",
-                "js/model/doubanx.js",
-                "js/controller/qq.js",
-                "js/controller/youku.js",
-                "js/controller/tudou.js",
-                "js/controller/iqiyi.js",
-                "js/controller/leshi.js",
-                "js/controller/amazon.js",
-                "js/controller/dangdang.js",
-                "js/controller/jd.js"
+                "js/model/doubanx.js"
             ]
+        },
+        {
+            "matches": [ "http://film.qq.com/cover/*", "http://v.qq.com/cover/*" ],
+            "js": [ "js/controller/qq.js" ]
+        },
+        {
+            "matches": [ "http://v.youku.com/v_show/*" ],
+            "js": [ "js/controller/youku.js" ]
+        },
+        {
+            "matches": [ "http://www.tudou.com/albumplay/*" ],
+            "js": [ "js/controller/tudou.js" ]
+        },
+        {
+            "matches": [ "http://www.iqiyi.com/*" ],
+            "js": [ "js/controller/iqiyi.js" ]
+        },
+        {
+            "matches": [ "http://www.le.com/ptv/vplay/*" ],
+            "js": [ "js/controller/leshi.js" ]
+        },
+        {
+            "matches": [ "http://www.amazon.cn/*" ],
+            "js": [ "js/controller/amazon.js" ]
+        },
+        {
+            "matches": [ "http://product.dangdang.com/*" ],
+            "js": [ "js/controller/dangdang.js" ]
+        },
+        {
+            "matches": [ "http://item.jd.com/*" ],
+            "js": [ "js/controller/jd.js" ]
         }
     ]
 }
