@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
+    <app appid='ioacifoopoldngldmbknimhhophmfbgh'>
+        <updatecheckcodebase='https://raw.githubusercontent.com/wange1228/DoubanX_crx/master/build/doubanx.crx' version='0.6' />
+    </app>
+</gupdate>
