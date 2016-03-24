@@ -15,10 +15,10 @@ class DoubanX {
     static formatName(name) {
         const num = ['一', '二', '三', '四', '五',
                      '六', '七', '八', '九', '十'];
-        return $.trim(name)
+        return name.trim()
                 .replace('《', '').replace('》', '')  // 去掉书名号
                 .replace(/(.*)?(第.*?季)/i, "$1 $2")  // 美剧名格式化
-                .replace(/(.*)?第(\d*)?季/i, function($1, $2, $3) {
+                .replace(/(.*)?第(\d*)?季/i, ($1, $2, $3) => {
                     return $2 + '第' + num[$3-1] + '季';
                 })                                   // 美剧名格式化
                 .replace(/(\(.*\))/i, "")            // 去掉英文括号
@@ -44,23 +44,20 @@ class DoubanX {
         const name = that.name;
         const type = that.type;
         const force = that.force;
-
-        $.ajax({
-            url: that.api,
-            data: {
-                name: DoubanX.formatName(name),
-                type: type,
-                force: force
-            },
-            type: 'post',
-            dataType: 'json',
-            success: (data) => {
+        const params = `name=${DoubanX.formatName(name)}&type=${type}&force=${force}`;
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', that.api, true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.onreadystatechange = () => {
+            if(xhttp.readyState == 4 && xhttp.status == 200) {
+                const data = JSON.parse(xhttp.responseText);
                 if (data.ret === 0) {
                     callback(DoubanX.formatData(data.data));
                     localStorage.setItem(name, JSON.stringify(data.data));
                 }
             }
-        });
+        };
+        xhttp.send(params);
     }
 
     /**
@@ -106,6 +103,16 @@ class DoubanX {
      * 默认回调方法
      */
     defaultCallback(data) {
-        $('body').append(new Template(data).typeA());
+        let el = document.createElement('div');
+        el.innerHTML = new Template(data).typeA();
+        document.querySelector('body').appendChild(el.childNodes[0]);
+        // 事件绑定
+        document.querySelector('body').addEventListener('click', function(ev) {
+            if (ev.target && ev.target.className === 'interest_close') {
+                document.querySelector('body').removeChild(
+                    document.querySelector('#interest_sectl')
+                );
+            }
+        });
     }
 }

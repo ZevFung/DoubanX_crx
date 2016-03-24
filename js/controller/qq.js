@@ -3,39 +3,39 @@ class QQ {
         this.isFilm = window.location.host === 'film.qq.com';
         this.isVideo = window.location.host === 'v.qq.com';
         this.page = {
-            video: $('#mod_player').length > 0,     // 播放页
-            tv: ($('#mod_player').length > 0) &&
-                ($('.album_list li').length > 0),   // 电视剧
-            movie: ($('#mod_player').length > 0) &&
-                ($('.album_list li').length === 0)  // 电影
+            video: document.querySelectorAll('#mod_player').length > 0,     // 播放页
+            tv: (document.querySelectorAll('#mod_player').length > 0) &&
+                (document.querySelectorAll('.album_list li').length > 0),   // 电视剧
+            movie: (document.querySelectorAll('#mod_player').length > 0) &&
+                (document.querySelectorAll('.album_list li').length === 0)  // 电影
         };
     }
 
     main() {
         if (this.isFilm && this.page.movie) {
             new DoubanX({
-                name: $('.player_title').text(),
+                name: document.querySelector('.player_title').innerText,
                 type: 'movie'
             }).getRate();
         }
 
         if (this.isFilm && this.page.tv) {
             new DoubanX({
-                name: $('.album_title').text(),
+                name: document.querySelector('.album_title').innerText,
                 type: 'movie'
             }).getRate();
         }
 
         if (this.isVideo && this.page.tv) {
             new DoubanX({
-                name: $('h3.title_inner').text(),
+                name: document.querySelector('.intro_title .title_inner').innerText,
                 type: 'movie'
             }).getRate();
         }
 
         if (this.isVideo && this.page.movie) {
             new DoubanX({
-                name: $('#h1_title').text(),
+                name: document.querySelector('#h1_title').innerText,
                 type: 'movie'
             }).getRate();
         }

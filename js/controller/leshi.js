@@ -9,11 +9,10 @@ class Leshi {
     main() {
         if (this.isLeshi && this.page.video) {
             new DoubanX({
-                name: $('h1.j-video-name').text(),
+                name: document.querySelector('.j-video-name').innerText,
                 type: 'movie'
             }).getRate();
         }
-
     }
 }
 

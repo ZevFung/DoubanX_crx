@@ -9,7 +9,7 @@ class Tudou {
     main() {
         if (this.isTudou && this.page.video) {
             new DoubanX({
-                name: $('#videoKw a').text(),
+                name: document.querySelector('#videoKw a').innerText,
                 type: 'movie'
             }).getRate();
         }

@@ -15,9 +15,6 @@ class Template {
      */
     typeA() {
         const data = this.data;
-        $("body").on("click", "#interest_sectl .interest_close", function(ev) {
-            $("#interest_sectl").remove();
-        });
         if (data.vote > 10) {
             return `<div id="interest_sectl">
                         <a href="javascript:;" class="interest_close"></a>
