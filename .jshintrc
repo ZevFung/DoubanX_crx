@@ -1,11 +1,3 @@
 {
-    "esnext": true,
-    "globals": {
-        "$": false,
-        "window": false,
-        "Date": false,
-        "localStorage": false,
-        "DoubanX": false,
-        "Template": false
-    }
+    "esnext": true
 }
