@@ -5,7 +5,7 @@ class DoubanX {
         this.force = options.force || 0;    // 是否强制更新 0否 1是
         this.time = null;   // 缓存的时间戳
         this.expire = 5;    // 缓存过期时间5天，0表示不缓存
-        this.api = 'http://doubanx.wange.im/get_rate'; // 接口地址
+        this.api = '//doubanx.wange.im/get_rate'; // 接口地址
         // localStorage.clear();
     }
 

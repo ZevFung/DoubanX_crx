@@ -26,6 +26,7 @@
                 "http://tv.sohu.com/*",
                 "http://film.sohu.com/album/*",
                 "http://www.amazon.cn/*",
+                "https://www.amazon.cn/*",
                 "http://product.dangdang.com/*",
                 "http://item.jd.com/*"
             ],
@@ -60,7 +61,7 @@
             "js": [ "js/controller/sohu.js" ]
         },
         {
-            "matches": [ "http://www.amazon.cn/*" ],
+            "matches": [ "http://www.amazon.cn/*", "https://www.amazon.cn/*" ],
             "js": [ "js/controller/amazon.js" ]
         },
         {
