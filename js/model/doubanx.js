@@ -5,7 +5,10 @@ class DoubanX {
         this.force = options.force || 0;    // 是否强制更新 0否 1是
         this.time = null;   // 缓存的时间戳
         this.expire = 5;    // 缓存过期时间5天，0表示不缓存
-        this.api = '//doubanx.wange.im/get_rate'; // 接口地址
+        this.api = {
+            getRate: '//doubanx.wange.im/get_rate',
+            getReview: '//doubanx.wange.im/get_review'
+        };
         // localStorage.clear();
     }
 
@@ -46,7 +49,7 @@ class DoubanX {
         const force = that.force;
         const params = `name=${DoubanX.formatName(name)}&type=${type}&force=${force}`;
         const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', that.api, true);
+        xhttp.open('POST', that.api.getRate, true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp.onreadystatechange = () => {
             if(xhttp.readyState == 4 && xhttp.status == 200) {
@@ -83,9 +86,26 @@ class DoubanX {
     getRate(callback) {
         const that = this;
         const name = that.name;
-        const inCache = that.getRateOffline(callback || that.defaultCallback);
+        // 优先读取缓存
+        const inCache = that.getRateOffline((data) => {
+            that.showRate(data);
+            that.getReview(data, (review) => {
+                that.showReview(Object.assign(
+                    {}, {rate: data}, {review: review}
+                ));
+            });
+        });
+
+        // 没有缓存则实时获取
         if (!inCache) {
-            that.getRateOnline(callback || that.defaultCallback);
+            that.getRateOnline((data) => {
+                that.showRate(data);
+                that.getReview(data, (review) => {
+                    that.showReview(Object.assign(
+                        {}, {rate: data}, {review: review}
+                    ));
+                });
+            });
         }
 
         // 超过缓存时间重新拉取豆瓣最新数据
@@ -94,17 +114,44 @@ class DoubanX {
             const gap = (now - that.time) / 1000 / 60 / 60 / 24;
             if (gap >= that.expire) {
                 that.force = 1;
-                that.getRateOnline(callback || that.defaultCallback);
+                that.getRateOnline((data) => {
+                    that.showRate(data);
+                    that.getReview(data, (review) => {
+                        that.showReview(Object.assign(
+                            {}, {rate: data}, {review: review}
+                        ));
+                    });
+                });
             }
         }
     }
 
     /**
-     * 默认回调方法
+     * 获取豆瓣评论
      */
-    defaultCallback(data) {
+    getReview(data, callback) {
+        const that = this;
+        const params = `id=${data.id}`;
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', that.api.getReview, true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.onreadystatechange = () => {
+            if(xhttp.readyState == 4 && xhttp.status == 200) {
+                const data = JSON.parse(xhttp.responseText);
+                if (data.ret === 0) {
+                    callback(data.data);
+                }
+            }
+        };
+        xhttp.send(params);
+    }
+
+    /**
+     * 显示豆瓣评分
+     */
+    showRate(data) {
         let el = document.createElement('div');
-        el.innerHTML = new Template(data).typeA();
+        el.innerHTML = new Template(data).rate();
         document.querySelector('body').appendChild(el.childNodes[0]);
         // 事件绑定
         document.querySelector('body').addEventListener('click', function(ev) {
@@ -114,5 +161,14 @@ class DoubanX {
                 );
             }
         });
+    }
+
+    /**
+     * 显示豆瓣评论
+     */
+    showReview(data) {
+        let el = document.createElement('div');
+        el.innerHTML = new Template(data).review();
+        document.querySelector('#interest_sectl').appendChild(el.childNodes[0]);
     }
 }

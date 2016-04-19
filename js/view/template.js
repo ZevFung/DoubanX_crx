@@ -11,9 +11,9 @@ class Template {
     }
 
     /**
-     * 模板A
+     * 评分模板
      */
-    typeA() {
+    rate() {
         const data = this.data;
         if (data.vote > 10) {
             return `<div id="interest_sectl">
@@ -69,5 +69,31 @@ class Template {
                         </div>
                     </div>`;
         }
+    }
+
+    /**
+     * 评论模板
+     */
+    review() {
+        const data = this.data;
+        let list = '';
+        data.review.forEach((review) => {
+            list += `<li class="comment-item">
+                        <h3>
+                            <span class="comment-info">${review.creator}</span>
+                        </h3>
+                        <p class="comment-content">
+                            <a href="${review.link}" target="_blank">${review.title}</a>
+                        </p>
+                    </li>`;
+        });
+        return `<div id="comment-list-wrapper" class="indent">
+                    <div class="comment-list show">
+                        <ul>
+                            ${list}
+                        </ul>
+                    </div>
+                    <a href="https://${data.rate.type}.douban.com/subject/${data.rate.id}/reviews" class="comment-more" target="_blank">查看更多评论&raquo;</a>
+                </div>`;
     }
 }
