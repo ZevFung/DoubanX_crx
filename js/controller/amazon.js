@@ -2,7 +2,7 @@ class Amazon {
     constructor() {
         this.isAmazon = window.location.host === 'www.amazon.cn';
         this.page = {
-            book: document.querySelectorAll('#sitbLogoImg').length > 0
+            book: document.querySelector('#productTitle, #ebooksProductTitle')
         };
     }
 
