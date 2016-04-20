@@ -38,10 +38,10 @@ class Template {
         const windowHeight = window.document.documentElement.clientHeight;
         const doubanHeight = document.querySelector('#interest_sectl').offsetHeight;
         // 上下至少各预留 100px
-        if (windowHeight < doubanHeight + 200 &&
-            windowHeight > 436
+        if (windowHeight < doubanHeight + 100 &&
+            windowHeight > 340
         ) {
-            document.querySelector('#interest_sectl ul').style.maxHeight = (windowHeight - 436) + 'px';
+            document.querySelector('#interest_sectl ul').style.maxHeight = (windowHeight - 340) + 'px';
         }
     }
 
