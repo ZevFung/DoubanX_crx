@@ -40,23 +40,19 @@ class DoubanX {
     }
 
     /**
-     * 实时获取豆瓣信息
+     * 实时获取
      */
-    getRateOnline(callback) {
+    getOnline(key, url, params, callback) {
         const that = this;
-        const name = that.name;
-        const type = that.type;
-        const force = that.force;
-        const params = `name=${DoubanX.formatName(name)}&type=${type}&force=${force}`;
         const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', that.api.getRate, true);
+        xhttp.open('POST', url, true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp.onreadystatechange = () => {
             if(xhttp.readyState == 4 && xhttp.status == 200) {
                 const data = JSON.parse(xhttp.responseText);
                 if (data.ret === 0) {
-                    callback(DoubanX.formatData(data.data));
-                    localStorage.setItem(`${name}_rate`, JSON.stringify(data.data));
+                    callback(data);
+                    localStorage.setItem(key, JSON.stringify(data.data));
                 }
             }
         };
@@ -64,20 +60,41 @@ class DoubanX {
     }
 
     /**
-     * 从本地缓存中获取豆瓣信息
+     * 从本地缓存中获取
      */
-    getRateOffline(callback) {
+    getOffline(key, callback) {
         let output = false;
-        if (localStorage.getItem(`${this.name}_rate`)) {
-            const jsonObj = JSON.parse(localStorage.getItem(`${this.name}_rate`));
-            callback(
-                jsonObj
-            );
+        if (localStorage.getItem(key)) {
+            const jsonObj = JSON.parse(localStorage.getItem(key));
+            callback(jsonObj);
             this.time = jsonObj.time;
             output = true;
         }
 
         return output;
+    }
+
+    /**
+     * 实时获取豆瓣信息
+     */
+    getRateOnline(callback) {
+        const key = `${this.name}_${this.type}_rate`;
+        const url = this.api.getRate;
+        const params = `name=${DoubanX.formatName(this.name)}&type=${this.type}&force=${this.force}`;
+
+        this.getOnline(key, url, params, (data) => {
+            callback(DoubanX.formatData(data.data));
+        });
+    }
+
+    /**
+     * 从本地缓存中获取豆瓣信息
+     */
+    getRateOffline(callback) {
+        const key = `${this.name}_${this.type}_rate`;
+        return this.getOffline(key, (data) => {
+            callback(data);
+        });
     }
 
     /**
@@ -130,38 +147,23 @@ class DoubanX {
      * 实时获取豆瓣评论
      */
     getReviewOnline(data, callback) {
-        const that = this;
+        const key = `${this.name}_${this.type}_review`;
+        const url = this.api.getReview;
         const params = `id=${data.id}`;
-        const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', that.api.getReview, true);
-        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.onreadystatechange = () => {
-            if(xhttp.readyState == 4 && xhttp.status == 200) {
-                const reviewData = JSON.parse(xhttp.responseText);
-                if (reviewData.ret === 0) {
-                    callback(reviewData.data);
-                    localStorage.setItem(`${data.name}_review`, JSON.stringify(reviewData.data));
-                }
-            }
-        };
-        xhttp.send(params);
+
+        this.getOnline(key, url, params, (data) => {
+            callback(data.data);
+        });
     }
 
     /**
      * 从本地缓存中获取豆瓣评论
      */
     getReviewOffline(callback) {
-        let output = false;
-        if (localStorage.getItem(`${this.name}_review`)) {
-            const jsonObj = JSON.parse(localStorage.getItem(`${this.name}_review`));
-            callback(
-                jsonObj
-            );
-            this.time = jsonObj.time;
-            output = true;
-        }
-
-        return output;
+        const key = `${this.name}_${this.type}_review`;
+        return this.getOffline(key, (data) => {
+            callback(data);
+        });
     }
 
     /**
