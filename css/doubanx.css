@@ -171,7 +171,7 @@
 
 
 #comment-list-wrapper {
-    margin-top: 10px
+    margin-top: 20px
 }
 
 #comment-list-wrapper .comment-list ul {
@@ -190,19 +190,6 @@
     margin-bottom: 5px
 }
 
-#comment-list-wrapper .comment-list .comment-item h3 {
-    font: 13px/1.7em Arial, Helvetica, sans-serif;
-    height: 1.7em;
-    overflow: hidden;
-    background-color: #fff;
-    margin: 0;
-    padding: 0
-}
-
-#comment-list-wrapper .comment-list .comment-item h3 span {
-    margin-bottom: 12px
-}
-
 #comment-list-wrapper .comment-list .comment-item .comment-content {
     margin-bottom: 5px;
     overflow: hidden
@@ -213,9 +200,13 @@
 }
 
 #comment-list-wrapper .comment-list.show {
+    margin-top: 10px;
     display: block
 }
 
+#comment-list-wrapper .comment-ft {
+    text-align: right
+}
 #comment-list-wrapper .comment-more {
     line-height: 1.7em
 }
