@@ -4,7 +4,7 @@
     "description": "在视频播放页以及图书详情页显示当前视频或图书在豆瓣对应的评分、评星、评论等信息。（目前电影、电视剧支持腾讯、优酷、土豆、爱奇艺、乐视、搜狐，图书支持亚马逊、京东、当当网）",
     "homepage_url": "https://github.com/wange1228/doubanx_crx",
     "author": "i@wange.im",
-    "version": "0.7.4",
+    "version": "0.7.5",
     "manifest_version": 2,
     "icons": {
         "16": "img/doubanx.png",
