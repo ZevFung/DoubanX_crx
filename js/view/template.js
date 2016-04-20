@@ -19,7 +19,10 @@ class Template {
         document.querySelector('body').appendChild(el.childNodes[0]);
         // 事件绑定
         document.querySelector('body').addEventListener('click', function(ev) {
-            if (ev.target && ev.target.className === 'interest_close') {
+            if (ev.target &&
+                ev.target.className === 'interest_close' &&
+                document.querySelector('#interest_sectl')
+                ) {
                 document.querySelector('#interest_sectl').className = 'animated fadeOutRightBig';
                 setTimeout(() => {
                     document.querySelector('body').removeChild(
@@ -126,7 +129,7 @@ class Template {
                         </p>
                     </li>`;
         });
-        return `<div id="comment-list-wrapper" class="indent">
+        return `<div id="comment-list-wrapper" class="indent animated fadeIn">
                     <div class="rating_logo">豆瓣热评</div>
                     <div class="comment-list show">
                         <ul>
