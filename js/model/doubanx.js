@@ -105,22 +105,22 @@ class DoubanX {
         const name = that.name;
         // 优先读取缓存
         const inCache = that.getRateOffline((data) => {
-            that.showRate(data);
+            new Template(data).showRate();
             that.getReview(data, (review) => {
-                that.showReview(Object.assign(
+                new Template(Object.assign(
                     {}, {rate: data}, {review: review}
-                ));
+                )).showReview();
             });
         });
 
         // 没有缓存则实时获取
         if (!inCache) {
             that.getRateOnline((data) => {
-                that.showRate(data);
+                new Template(data).showRate();
                 that.getReview(data, (review) => {
-                    that.showReview(Object.assign(
+                    new Template(Object.assign(
                         {}, {rate: data}, {review: review}
-                    ));
+                    )).showReview();
                 });
             });
         }
@@ -132,11 +132,11 @@ class DoubanX {
             if (gap >= that.expire) {
                 that.force = 1;
                 that.getRateOnline((data) => {
-                    that.showRate(data);
+                    new Template(data).showRate();
                     that.getReview(data, (review) => {
-                        that.showReview(Object.assign(
+                        new Template(Object.assign(
                             {}, {rate: data}, {review: review}
-                        ));
+                        )).showReview();
                     });
                 });
             }
@@ -193,31 +193,5 @@ class DoubanX {
                 });
             }
         }
-    }
-
-    /**
-     * 显示豆瓣评分
-     */
-    showRate(data) {
-        let el = document.createElement('div');
-        el.innerHTML = new Template(data).rate();
-        document.querySelector('body').appendChild(el.childNodes[0]);
-        // 事件绑定
-        document.querySelector('body').addEventListener('click', function(ev) {
-            if (ev.target && ev.target.className === 'interest_close') {
-                document.querySelector('body').removeChild(
-                    document.querySelector('#interest_sectl')
-                );
-            }
-        });
-    }
-
-    /**
-     * 显示豆瓣评论
-     */
-    showReview(data) {
-        let el = document.createElement('div');
-        el.innerHTML = new Template(data).review();
-        document.querySelector('#interest_sectl').appendChild(el.childNodes[0]);
     }
 }

@@ -11,9 +11,35 @@ class Template {
     }
 
     /**
-     * 评分模板
+     * 显示豆瓣评分
      */
-    rate() {
+    showRate() {
+        let el = document.createElement('div');
+        el.innerHTML = this.renderRate();
+        document.querySelector('body').appendChild(el.childNodes[0]);
+        // 事件绑定
+        document.querySelector('body').addEventListener('click', function(ev) {
+            if (ev.target && ev.target.className === 'interest_close') {
+                document.querySelector('body').removeChild(
+                    document.querySelector('#interest_sectl')
+                );
+            }
+        });
+    }
+
+    /**
+     * 显示豆瓣评论
+     */
+    showReview(data) {
+        let el = document.createElement('div');
+        el.innerHTML = this.renderReview();
+        document.querySelector('#interest_sectl').appendChild(el.childNodes[0]);
+    }
+
+    /**
+     * 渲染评分模板
+     */
+    renderRate() {
         const data = this.data;
         if (data.vote > 10) {
             return `<div id="interest_sectl">
@@ -72,9 +98,9 @@ class Template {
     }
 
     /**
-     * 评论模板
+     * 渲染评论模板
      */
-    review() {
+    renderReview() {
         const data = this.data;
         let list = '';
         data.review.forEach((review) => {
