@@ -20,9 +20,13 @@ class Template {
         // 事件绑定
         document.querySelector('body').addEventListener('click', function(ev) {
             if (ev.target && ev.target.className === 'interest_close') {
-                document.querySelector('body').removeChild(
-                    document.querySelector('#interest_sectl')
-                );
+                document.querySelector('#interest_sectl').className = 'animated fadeOut';
+                // 为了动画效果延迟0.5s执行
+                setTimeout(() => {
+                    document.querySelector('body').removeChild(
+                        document.querySelector('#interest_sectl')
+                    );
+                }, 500);
             }
         });
     }
@@ -51,7 +55,7 @@ class Template {
     renderRate() {
         const data = this.data;
         if (data.vote > 10) {
-            return `<div id="interest_sectl">
+            return `<div id="interest_sectl" class="animated fadeIn">
                         <a href="javascript:;" class="interest_close"></a>
                         <div class="rating_wrap clearbox">
                             <div class="rating_logo">豆瓣评分</div>
@@ -87,7 +91,7 @@ class Template {
                         </div>
                     </div>`;
         } else {
-            return `<div id="interest_sectl">
+            return `<div id="interest_sectl" class="animated fadeIn">
                         <a href="javascript:;" class="interest_close"></a>
                         <div class="rating_wrap clearbox">
                             <div class="rating_logo">豆瓣评分</div>
@@ -119,7 +123,7 @@ class Template {
                         </p>
                     </li>`;
         });
-        return `<div id="comment-list-wrapper" class="indent">
+        return `<div id="comment-list-wrapper" class="indent animated fadeIn">
                     <div class="rating_logo">豆瓣热评</div>
                     <div class="comment-list show">
                         <ul>
