@@ -56,7 +56,7 @@ class DoubanX {
                 const data = JSON.parse(xhttp.responseText);
                 if (data.ret === 0) {
                     callback(DoubanX.formatData(data.data));
-                    localStorage.setItem(name, JSON.stringify(data.data));
+                    localStorage.setItem(`${name}_rate`, JSON.stringify(data.data));
                 }
             }
         };
@@ -68,8 +68,8 @@ class DoubanX {
      */
     getRateOffline(callback) {
         let output = false;
-        if (localStorage.getItem(this.name)) {
-            const jsonObj = JSON.parse(localStorage.getItem(this.name));
+        if (localStorage.getItem(`${this.name}_rate`)) {
+            const jsonObj = JSON.parse(localStorage.getItem(`${this.name}_rate`));
             callback(
                 jsonObj
             );
@@ -127,9 +127,9 @@ class DoubanX {
     }
 
     /**
-     * 获取豆瓣评论
+     * 实时获取豆瓣评论
      */
-    getReview(data, callback) {
+    getReviewOnline(data, callback) {
         const that = this;
         const params = `id=${data.id}`;
         const xhttp = new XMLHttpRequest();
@@ -137,13 +137,60 @@ class DoubanX {
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp.onreadystatechange = () => {
             if(xhttp.readyState == 4 && xhttp.status == 200) {
-                const data = JSON.parse(xhttp.responseText);
-                if (data.ret === 0) {
-                    callback(data.data);
+                const reviewData = JSON.parse(xhttp.responseText);
+                if (reviewData.ret === 0) {
+                    callback(reviewData.data);
+                    localStorage.setItem(`${data.name}_review`, JSON.stringify(reviewData.data));
                 }
             }
         };
         xhttp.send(params);
+    }
+
+    /**
+     * 从本地缓存中获取豆瓣评论
+     */
+    getReviewOffline(callback) {
+        let output = false;
+        if (localStorage.getItem(`${this.name}_review`)) {
+            const jsonObj = JSON.parse(localStorage.getItem(`${this.name}_review`));
+            callback(
+                jsonObj
+            );
+            this.time = jsonObj.time;
+            output = true;
+        }
+
+        return output;
+    }
+
+    /**
+     * 获取豆瓣评论
+     */
+    getReview(data, callback) {
+        const that = this;
+        // 优先读取缓存
+        const inCache = that.getReviewOffline((review) => {
+            callback(review);
+        });
+
+        // 没有缓存则实时获取
+        if (!inCache) {
+            that.getReviewOnline(data, (review) => {
+                callback(review);
+            });
+        }
+
+        // 超过缓存时间重新拉取豆瓣最新数据
+        if (that.time) {
+            const now = Date.parse(new Date());
+            const gap = (now - that.time) / 1000 / 60 / 60 / 24;
+            if (gap >= that.expire) {
+                that.getReviewOnline(data, (review) => {
+                    callback(review);
+                });
+            }
+        }
     }
 
     /**
