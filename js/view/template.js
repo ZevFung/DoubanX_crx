@@ -34,6 +34,15 @@ class Template {
         let el = document.createElement('div');
         el.innerHTML = this.renderReview();
         document.querySelector('#interest_sectl').appendChild(el.childNodes[0]);
+
+        const windowHeight = window.document.documentElement.clientHeight;
+        const doubanHeight = document.querySelector('#interest_sectl').offsetHeight;
+        // 上下至少各预留 100px
+        if (windowHeight < doubanHeight + 200 &&
+            windowHeight > 436
+        ) {
+            document.querySelector('#interest_sectl ul').style.maxHeight = (windowHeight - 436) + 'px';
+        }
     }
 
     /**

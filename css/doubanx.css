@@ -62,7 +62,7 @@
     background-position:0 -150px
 }
 #interest_sectl {
-    width: 152px;
+    width: 160px;
     color:#9b9b9b;
     padding: 15px;
     position: fixed;
@@ -175,6 +175,8 @@
 }
 
 #comment-list-wrapper .comment-list ul {
+    overflow-y: auto;
+    min-height: 100px;
     list-style-type: none;
     margin: 0;
     padding: 0;
