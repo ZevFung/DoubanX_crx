@@ -20,13 +20,9 @@ class Template {
         // 事件绑定
         document.querySelector('body').addEventListener('click', function(ev) {
             if (ev.target && ev.target.className === 'interest_close') {
-                document.querySelector('#interest_sectl').className = 'animated fadeOut';
-                // 为了动画效果延迟0.5s执行
-                setTimeout(() => {
-                    document.querySelector('body').removeChild(
-                        document.querySelector('#interest_sectl')
-                    );
-                }, 500);
+                document.querySelector('body').removeChild(
+                    document.querySelector('#interest_sectl')
+                );
             }
         });
     }
