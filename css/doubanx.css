@@ -177,7 +177,6 @@
 
 #comment-list-wrapper .comment-list ul {
     overflow-y: auto;
-    min-height: 100px;
     list-style-type: none;
     margin: 0;
     padding: 0;
