@@ -8,7 +8,7 @@ class JD {
                     (window.location.pathname.indexOf('/cps/item/') === 0);
         // 京图电子书
         this.isE = (window.location.host === 'e.jd.com') &&
-                    (document.querySelector('#name h2').length > 0)
+                    (document.querySelectorAll('#name h2').length > 0)
     }
 
     main() {
