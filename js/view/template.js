@@ -14,44 +14,39 @@ class Template {
      * 显示豆瓣评分
      */
     showRate() {
-        let el = document.createElement('div');
-        el.innerHTML = this.renderRate();
-        document.querySelector('body').appendChild(el.childNodes[0]);
-        // 事件绑定
-        document.querySelector('body').addEventListener('click', (ev) => {
-            if (ev.target &&
-                ev.target.className === 'interest_close' &&
-                document.querySelector('#interest_sectl')
-                ) {
-                document.querySelector('#interest_sectl').className = 'animated fadeOutRightBig';
+        $('body')
+            .append(this.renderRate())
+            .on('click', '.interest_close', (ev) => {
+                ev.preventDefault();
+
+                $('#interest_sectl').attr('class', 'animated fadeOutRightBig');
                 setTimeout(() => {
-                    document.querySelector('body').removeChild(
-                        document.querySelector('#interest_sectl')
-                    );
+                    $('#interest_sectl').remove();
                 }, 500);
-            }
-        });
+
+            });
     }
 
     /**
      * 显示豆瓣评论
      */
     showReview(data) {
-        let el = document.createElement('div');
-        el.innerHTML = this.renderReview();
-        document.querySelector('#interest_sectl').appendChild(el.childNodes[0]);
+        $('#interest_sectl').append(this.renderReview());
 
-        const windowHeight = window.document.documentElement.clientHeight;
-        const doubanHeight = document.querySelector('#interest_sectl').offsetHeight;
+
+        const windowHeight = $(window).height();
+        const doubanHeight = $('#interest_sectl').height();
         // 上下至少各预留 100px
         if (windowHeight < doubanHeight + 100 &&
             windowHeight > 340
         ) {
-            document.querySelector('#interest_sectl ul').style.maxHeight = (windowHeight - 340) + 'px';
+            $('#interest_sectl ul').css({
+                maxHeight: (windowHeight - 340) + 'px'
+            });
         }
 
         setTimeout(() => {
-            document.querySelector('#interest_sectl').className = '';
+            $('#interest_sectl').toggleclass('');
         }, 500);
     }
 
