@@ -29,7 +29,8 @@
                 "https://www.amazon.cn/*",
                 "http://product.dangdang.com/*",
                 "http://item.jd.com/*",
-                "http://re.jd.com/*"
+                "http://re.jd.com/cps/item/*",
+                "http://e.jd.com/*"
             ],
             "css": ["css/doubanx.css"],
             "js": [
@@ -70,7 +71,7 @@
             "js": [ "js/controller/dangdang.js" ]
         },
         {
-            "matches": [ "http://item.jd.com/*", "http://re.jd.com/*" ],
+            "matches": [ "http://item.jd.com/*", "http://re.jd.com/cps/item/*", "http://e.jd.com/*" ],
             "js": [ "js/controller/jd.js" ]
         }
     ]
