@@ -33,7 +33,6 @@ class Template {
     showReview(data) {
         $('#interest_sectl').append(this.renderReview());
 
-
         const windowHeight = $(window).height();
         const doubanHeight = $('#interest_sectl').height();
         // 上下至少各预留 100px
@@ -46,7 +45,7 @@ class Template {
         }
 
         setTimeout(() => {
-            $('#interest_sectl').toggleclass('');
+            $('#interest_sectl').toggleClass('');
         }, 500);
     }
 
