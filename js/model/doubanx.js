@@ -2,9 +2,6 @@ class DoubanX {
     constructor(options) {
         this.name = options.name || '';     // 名称
         this.type = options.type || '';     // 类型 movie/book
-        this.force = options.force || 0;    // 是否强制更新 0否 1是
-        this.time = null;   // 缓存的时间戳
-        this.expire = 5;    // 缓存过期时间5天，0表示不缓存
         this.api = {
             getRate: '//doubanx.wange.im/get_rate',
             getReview: '//doubanx.wange.im/get_review',
@@ -35,7 +32,6 @@ class DoubanX {
      */
     static formatData(data) {
         data.rate = JSON.parse(data.rate);
-        data.time = Date.parse(data.time);
 
         return data;
     }
@@ -68,7 +64,6 @@ class DoubanX {
         if (localStorage.getItem(key)) {
             const jsonObj = JSON.parse(localStorage.getItem(key));
             callback(jsonObj);
-            this.time = jsonObj.time;
             output = true;
         }
 
@@ -81,7 +76,7 @@ class DoubanX {
     getRateOnline(callback) {
         const key = `${this.name}_${this.type}_rate`;
         const url = this.api.getRate;
-        const params = `name=${DoubanX.formatName(this.name)}&type=${this.type}&force=${this.force}`;
+        const params = `name=${DoubanX.formatName(this.name)}&type=${this.type}`;
 
         this.getOnline(key, url, params, (data) => {
             callback(DoubanX.formatData(data.data));
@@ -125,23 +120,6 @@ class DoubanX {
                 });
             });
         }
-
-        // 超过缓存时间重新拉取豆瓣最新数据
-        if (that.time) {
-            const now = Date.parse(new Date());
-            const gap = (now - that.time) / 1000 / 60 / 60 / 24;
-            if (gap >= that.expire) {
-                that.force = 1;
-                that.getRateOnline((data) => {
-                    new Template(data).showRate();
-                    that.getReview(data, (review) => {
-                        new Template(Object.assign(
-                            {}, {rate: data}, {review: review}
-                        )).showReview();
-                    });
-                });
-            }
-        }
     }
 
     /**
@@ -183,17 +161,6 @@ class DoubanX {
                 callback(review);
             });
         }
-
-        // 超过缓存时间重新拉取豆瓣最新数据
-        if (that.time) {
-            const now = Date.parse(new Date());
-            const gap = (now - that.time) / 1000 / 60 / 60 / 24;
-            if (gap >= that.expire) {
-                that.getReviewOnline(data, (review) => {
-                    callback(review);
-                });
-            }
-        }
     }
 
     getIntroOffline() {
@@ -203,7 +170,7 @@ class DoubanX {
     getIntroOnline(callback) {
         const key = `${this.name}_${this.type}_intro`;
         const url = this.api.getIntro;
-        const params = `name=${DoubanX.formatName(this.name)}&type=${this.type}&force=${this.force}`;
+        const params = `name=${DoubanX.formatName(this.name)}&type=${this.type}`;
 
         this.getOnline(key, url, params, (data) => {
             callback(data.data);
@@ -226,17 +193,6 @@ class DoubanX {
                 // callback(intro);
                 console.log(intro);
             });
-        }
-
-        // 超过缓存时间重新拉取豆瓣最新数据
-        if (that.time) {
-            const now = Date.parse(new Date());
-            const gap = (now - that.time) / 1000 / 60 / 60 / 24;
-            if (gap >= that.expire) {
-                that.getIntroOnline((intro) => {
-                    // callback(intro);
-                });
-            }
         }
     }
 }
