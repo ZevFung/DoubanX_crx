@@ -7,7 +7,8 @@ class DoubanX {
         this.expire = 5;    // 缓存过期时间5天，0表示不缓存
         this.api = {
             getRate: '//doubanx.wange.im/get_rate',
-            getReview: '//doubanx.wange.im/get_review'
+            getReview: '//doubanx.wange.im/get_review',
+            getIntro: '//doubanx.wange.im/get_intro'
         };
         // localStorage.clear();
     }
@@ -100,7 +101,7 @@ class DoubanX {
     /**
      * 获取豆瓣信息
      */
-    getRate(callback) {
+    getRate() {
         const that = this;
         const name = that.name;
         // 优先读取缓存
@@ -190,6 +191,50 @@ class DoubanX {
             if (gap >= that.expire) {
                 that.getReviewOnline(data, (review) => {
                     callback(review);
+                });
+            }
+        }
+    }
+
+    getIntroOffline() {
+        return false;
+    }
+
+    getIntroOnline(callback) {
+        const key = `${this.name}_${this.type}_intro`;
+        const url = this.api.getIntro;
+        const params = `name=${DoubanX.formatName(this.name)}&type=${this.type}&force=${this.force}`;
+
+        this.getOnline(key, url, params, (data) => {
+            callback(data.data);
+        });
+    }
+
+    /**
+     * 获取豆瓣简介
+     */
+    getIntro() {
+        const that = this;
+        // 优先读取缓存
+        const inCache = that.getIntroOffline((intro) => {
+            // callback(intro);
+        });
+
+        // 没有缓存则实时获取
+        if (!inCache) {
+            that.getIntroOnline((intro) => {
+                // callback(intro);
+                console.log(intro);
+            });
+        }
+
+        // 超过缓存时间重新拉取豆瓣最新数据
+        if (that.time) {
+            const now = Date.parse(new Date());
+            const gap = (now - that.time) / 1000 / 60 / 60 / 24;
+            if (gap >= that.expire) {
+                that.getIntroOnline((intro) => {
+                    // callback(intro);
                 });
             }
         }

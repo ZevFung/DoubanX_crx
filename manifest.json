@@ -17,7 +17,7 @@
     "content_scripts": [
         {
             "matches": [
-                "http://film.qq.com/cover/*",
+                "http://film.qq.com/*",
                 "http://v.qq.com/cover/*",
                 "http://v.youku.com/v_show/*",
                 "http://www.tudou.com/albumplay/*",
@@ -39,7 +39,7 @@
             ]
         },
         {
-            "matches": [ "http://film.qq.com/cover/*", "http://v.qq.com/cover/*" ],
+            "matches": [ "http://film.qq.com/*", "http://v.qq.com/cover/*" ],
             "js": [ "js/controller/qq.js" ]
         },
         {
