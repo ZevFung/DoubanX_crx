@@ -34,7 +34,6 @@
             ],
             "css": ["css/doubanx.css"],
             "js": [
-                "js/lib/zepto.min.js",
                 "js/view/template.js",
                 "js/model/doubanx.js"
             ]
