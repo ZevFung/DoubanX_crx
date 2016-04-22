@@ -18,7 +18,7 @@ class Template {
         el.innerHTML = this.renderRate();
         document.querySelector('body').appendChild(el.childNodes[0]);
         // 事件绑定
-        document.querySelector('body').addEventListener('click', function(ev) {
+        document.querySelector('body').addEventListener('click', (ev) => {
             if (ev.target &&
                 ev.target.className === 'interest_close' &&
                 document.querySelector('#interest_sectl')
