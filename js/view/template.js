@@ -49,39 +49,28 @@ class Template {
     }
 
     /**
-     * 显示电影简介
-     */
-    showMovieIntro($list) {
-        this.showTips($list, 'movie', false);
-    }
-
-    /**
-     * 显示图书简介
-     */
-    showBookIntro($list) {
-        this.showTips($list, 'book', false);
-    }
-
-    /**
-    * 显示简介前的Loading
-    */
-    showLoadIntro($list) {
-       this.showTips($list, 'movie', true);
-    }
-
-    /**
      * 显示简介浮层
      */
-    showTips($list, type, loading) {
+    showTips($list, type) {
         let renderOutput = '';
-        if (loading) {
-            renderOutput = this.renderLoadIntro();
-        } else {
-            if (type === 'movie') {
+        switch (type) {
+            case 'loading':
+                renderOutput = this.renderLoadIntro();
+                break;
+
+            case 'error':
+                renderOutput = this.renderErrorIntro();
+                break;
+
+            case 'movie':
                 renderOutput = this.renderMovieIntro();
-            } else if (type === 'book'){
+                break;
+
+            case 'book':
                 renderOutput = this.renderBookIntro();
-            }
+                break;
+
+            default:
         }
 
         $('#subject-tip').remove();
@@ -214,6 +203,7 @@ class Template {
         let directorsArr = [];
         let casts = '';
         let castsArr = [];
+        let average = '';
 
         title = data.title === data.original_title ? data.title : `${data.title}(${data.original_title})`;
         data.directors.forEach((director) => {
@@ -238,6 +228,7 @@ class Template {
                                     <span class="label">主演：</span>
                                     <span>${casts}</span>
                                 </li>` : '';
+        average = data.rating.average === 0 ? '' : `<span class="subject-rating">${Number(data.rating.average).toFixed(1)}</span>`;
 
 
         return `<div id="subject-tip">
@@ -246,7 +237,7 @@ class Template {
                         <h3>${title}<span class="release-year">${data.year}</span></h3>
                         <p class="star">
                             <span class="subject-star bigstar${data.rating.stars}"></span>
-                            <span class="subject-rating">${Number(data.rating.average).toFixed(1)}</span>
+                            ${average}
                             <span class="rater-num">(${data.collect_count}人评价)</span>
                         </p>
                     </div>
@@ -266,6 +257,18 @@ class Template {
      renderBookIntro() {
 
      }
+
+     /**
+      * 渲染错误
+      */
+    renderErrorIntro() {
+        return `<div id="subject-tip">
+                    <div class="rating_logo">豆瓣简介</div>
+                    <div class="subject-tip-hd">
+                        <h3>暂无数据 :(</h3>
+                    </div>
+                </div>`;
+    }
 
     /**
      * 渲染简介前的Loading

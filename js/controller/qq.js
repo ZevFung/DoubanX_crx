@@ -51,14 +51,18 @@ class QQ {
                         if ($list.data('allow') && !$list.data('loading')) {
                             $list.data('allow', false);
                             $list.data('loading', true);
-                            new Template().showLoadIntro($list);
+                            new Template().showTips($list, 'loading');
                             new DoubanX({
                                 name: $list.find('h4.name a').text(),
                                 type: 'movie'
                             }).getIntro((data) => {
                                 $list.data('allow', true);
                                 $list.data('loading', false);
-                                new Template(data).showMovieIntro($list);
+                                new Template(data).showTips($list, 'movie');
+                            }, () => {
+                                $list.data('allow', true);
+                                $list.data('loading', false);
+                                new Template().showTips($list, 'error');
                             });
                         }
                     }, 300);

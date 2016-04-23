@@ -40,7 +40,7 @@ class DoubanX {
     /**
      * 实时获取
      */
-    getOnline(key, url, params, callback) {
+    getOnline(key, url, params, callback, error) {
         const that = this;
         const xhttp = new XMLHttpRequest();
         xhttp.open('POST', url, true);
@@ -51,6 +51,8 @@ class DoubanX {
                 if (data.ret === 0) {
                     callback(data);
                     localStorage.setItem(key, JSON.stringify(data.data));
+                } else {
+                    error();
                 }
             }
         };
@@ -177,20 +179,20 @@ class DoubanX {
     /**
      * 实时获取豆瓣简介
      */
-    getIntroOnline(callback) {
+    getIntroOnline(callback, error) {
         const key = `${this.name}_${this.type}_intro`;
         const url = this.api.getIntro;
         const params = `name=${DoubanX.formatName(this.name)}&type=${this.type}`;
 
         this.getOnline(key, url, params, (data) => {
             callback(data.data);
-        });
+        }, error);
     }
 
     /**
      * 获取豆瓣简介
      */
-    getIntro(callback) {
+    getIntro(callback, error) {
         const that = this;
         // 优先读取缓存
         const inCache = that.getIntroOffline((intro) => {
@@ -201,7 +203,7 @@ class DoubanX {
         if (!inCache) {
             that.getIntroOnline((intro) => {
                 callback(intro);
-            });
+            }, error);
         }
     }
 }
