@@ -2,10 +2,11 @@ class DoubanX {
     constructor(options) {
         this.name = options.name || '';     // 名称
         this.type = options.type || '';     // 类型 movie/book
+        this.origin = '//doubanx.wange.im';
         this.api = {
-            getRate: '//doubanx.wange.im/get_rate',
-            getReview: '//doubanx.wange.im/get_review',
-            getIntro: '//doubanx.wange.im/get_intro'
+            getRate: `${this.origin}/get_rate`,
+            getReview: `${this.origin}/get_review`,
+            getIntro: `${this.origin}/get_intro`
         };
         // localStorage.clear();
     }
@@ -180,7 +181,7 @@ class DoubanX {
     /**
      * 获取豆瓣简介
      */
-    getIntro() {
+    getIntro(callback) {
         const that = this;
         // 优先读取缓存
         const inCache = that.getIntroOffline((intro) => {
@@ -190,7 +191,7 @@ class DoubanX {
         // 没有缓存则实时获取
         if (!inCache) {
             that.getIntroOnline((intro) => {
-                // callback(intro);
+                callback(intro);
                 console.log(intro);
             });
         }

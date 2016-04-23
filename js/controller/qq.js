@@ -42,24 +42,33 @@ class QQ {
         }
 
         if (this.isFilm && this.page.list) {
-            document.querySelector('ul.movie_list')
-            .addEventListener('mouseover', (ev) => {
-                if (ev.target.nodeName.toLowerCase() === 'ul') {return;}
-
-                let pNode = ev.target.parentNode;
-                let pName = pNode.nodeName.toLowerCase();
-                while (pNode !== null &&
-                       pNode.nodeType !== 9 &&
-                       pName !== 'li')
-                {
-                    pNode = pNode.parentNode;
-                    pName = pNode.nodeName.toLowerCase();
+            document.addEventListener('mouseover', (ev) => {
+                const $target = $(ev.target);
+                const $list = $target.parents('ul.movie_list li');
+                if ($list.length !== 0) {
+                    $list.data('allow', true);
+                    setTimeout(() => {
+                        if ($list.data('allow') && !$list.data('loading')) {
+                            $list.data('allow', false);
+                            $list.data('loading', true);
+                            new DoubanX({
+                                name: $list.find('h4.name a').text(),
+                                type: 'movie'
+                            }).getIntro(() => {
+                                $list.data('allow', true);
+                                $list.data('loading', false);
+                            });
+                        }
+                    }, 300);
                 }
+            });
 
-                new DoubanX({
-                    name: pNode.querySelector('a').getAttribute('title'),
-                    type: 'movie'
-                }).getIntro();
+            document.addEventListener('mouseout', (ev) => {
+                const $target = $(ev.target);
+                const $list = $target.parents('ul.movie_list li');
+                if ($list.length !== 0) {
+                    $list.data('allow', false);
+                }
             });
         }
     }
