@@ -75,6 +75,7 @@ class Template {
 
         $('#subject-tip').remove();
         const $body = $('body');
+
         $body.append(renderOutput);
         const bodyW = $body.width();
 

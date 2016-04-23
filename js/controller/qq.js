@@ -7,14 +7,13 @@ class QQ {
             tv: ($('#mod_player').length > 0) &&
                 ($('.album_list li').length > 0),   // 电视剧
             movie: ($('#mod_player').length > 0) &&
-                ($('.album_list li').length === 0), // 电影
-            list: ($('ul.movie_list').length > 0) ||    // 列表页
-                  ($('ul.list_item').length > 0) ||
-                  ($('ul.film_time').length > 0)
+                ($('.album_list li').length === 0)  // 电影
         };
+        this.reg = /^http:\/\/(film|v)\.qq\.com\/cover\/.*\.html/;
     }
 
     main() {
+        const that = this;
         if (this.isFilm && this.page.movie) {
             new DoubanX({
                 name: $('.player_title').text(),
@@ -43,43 +42,53 @@ class QQ {
             }).getRate();
         }
 
-        if (this.isFilm && this.page.list) {
-            $('body').on('mouseover', 'ul.movie_list li, ul.film_time li, ul.list_item li', (ev) => {
-                const $target = $(ev.target);
-                const $list = $target.parents('ul.movie_list li, ul.film_time li, ul.list_item li');
-                if ($list.length !== 0) {
-                    $list.data('allow', true);
-                    setTimeout(() => {
-                        if ($list.data('allow') && !$list.data('loading')) {
-                            $list.data('allow', false);
-                            $list.data('loading', true);
-                            new Template().showTips($list, 'loading');
-                            new DoubanX({
-                                name: $list.find('h4.name a, h3.tit_info a, p.name_info a').text(),
-                                type: 'movie'
-                            }).getIntro((data) => {
-                                $list.data('allow', true);
-                                $list.data('loading', false);
-                                new Template(data).showTips($list, 'movie');
-                            }, () => {
-                                $list.data('allow', true);
-                                $list.data('loading', false);
-                                new Template().showTips($list, 'error');
-                            });
-                        }
-                    }, 300);
-                }
-            });
+        $('body').on('mouseover', 'li', (ev) => {
+            const $target = $(ev.currentTarget);
+            const $link = $target.find('a').eq(0);
+            const href = $.trim($link.attr('href'));
+            const isMovie = that.reg.test(href);
 
-            $('body').on('mouseout', 'ul.movie_list li, ul.film_time li, ul.list_item li', (ev) => {
-                const $target = $(ev.target);
-                const $list = $target.parents('ul.movie_list li, ul.film_time li, ul.list_item li');
-                if ($list.length !== 0) {
-                    $list.data('allow', false);
-                    $('#subject-tip').remove();
-                }
-            });
-        }
+            if (isMovie) {
+                $target.data('allow', true);
+                $target.data('movein', false);
+                setTimeout(() => {
+                    if ($target.data('allow') && !$target.data('loading')) {
+                        $target.data('allow', false);
+                        $target.data('loading', true);
+                        new Template().showTips($target, 'loading');
+                        new DoubanX({
+                            name: $link.attr('title') || $link.text(),
+                            type: 'movie'
+                        }).getIntro((data) => {
+                            $target.data('allow', true);
+                            $target.data('loading', false);
+                            if (!$target.data('movein')) {
+                                new Template(data).showTips($target, 'movie');
+                            }
+                        }, () => {
+                            $target.data('allow', true);
+                            $target.data('loading', false);
+                            if (!$target.data('movein')) {
+                                new Template().showTips($target, 'error');
+                            }
+                        });
+                    }
+                }, 300);
+            }
+        });
+
+        $('body').on('mouseout', 'li', (ev) => {
+            const $target = $(ev.currentTarget);
+            const $link = $target.find('a').eq(0);
+            const href = $.trim($link.attr('href'));
+            const isMovie = that.reg.test(href);
+
+            if (isMovie) {
+                $target.data('allow', false);
+                $target.data('movein', true);
+                $('#subject-tip').remove();
+            }
+        });
     }
 }
 
