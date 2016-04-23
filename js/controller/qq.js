@@ -8,7 +8,9 @@ class QQ {
                 ($('.album_list li').length > 0),   // 电视剧
             movie: ($('#mod_player').length > 0) &&
                 ($('.album_list li').length === 0), // 电影
-            list: $('ul.movie_list').length > 0     // 列表页
+            list: ($('ul.movie_list').length > 0) ||    // 列表页
+                  ($('ul.list_item').length > 0) ||
+                  ($('ul.film_time').length > 0)
         };
     }
 
@@ -42,9 +44,9 @@ class QQ {
         }
 
         if (this.isFilm && this.page.list) {
-            $('body').on('mouseover', 'ul.movie_list li', (ev) => {
+            $('body').on('mouseover', 'ul.movie_list li, ul.film_time li, ul.list_item li', (ev) => {
                 const $target = $(ev.target);
-                const $list = $target.parents('ul.movie_list li');
+                const $list = $target.parents('ul.movie_list li, ul.film_time li, ul.list_item li');
                 if ($list.length !== 0) {
                     $list.data('allow', true);
                     setTimeout(() => {
@@ -53,7 +55,7 @@ class QQ {
                             $list.data('loading', true);
                             new Template().showTips($list, 'loading');
                             new DoubanX({
-                                name: $list.find('h4.name a').text(),
+                                name: $list.find('h4.name a, h3.tit_info a, p.name_info a').text(),
                                 type: 'movie'
                             }).getIntro((data) => {
                                 $list.data('allow', true);
@@ -69,9 +71,9 @@ class QQ {
                 }
             });
 
-            $('body').on('mouseout', 'ul.movie_list li', (ev) => {
+            $('body').on('mouseout', 'ul.movie_list li, ul.film_time li, ul.list_item li', (ev) => {
                 const $target = $(ev.target);
-                const $list = $target.parents('ul.movie_list li');
+                const $list = $target.parents('ul.movie_list li, ul.film_time li, ul.list_item li');
                 if ($list.length !== 0) {
                     $list.data('allow', false);
                     $('#subject-tip').remove();

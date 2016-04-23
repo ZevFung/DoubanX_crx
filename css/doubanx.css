@@ -279,6 +279,7 @@
 }
 
 .subject-tip-bd li .label {
+    color: #666;
     margin-left: -40px;
     float: left;
     padding: 0
