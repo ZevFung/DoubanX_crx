@@ -93,7 +93,7 @@ class Template {
         {
             $tips.css({
                 top: listT,
-                left: listW + listL + 10
+                left: listW + listL
             });
         }
         // 其次在左侧展示
@@ -101,7 +101,7 @@ class Template {
         {
             $tips.css({
                 top: listT,
-                left: listL - tipsW - 10
+                left: listL - tipsW
             });
         }
     }
@@ -276,15 +276,12 @@ class Template {
      */
     renderLoadIntro() {
         return `<div id="subject-tip">
-                    <div id="loading">
-                        <div class="bar1"></div>
-                        <div class="bar2"></div>
-                        <div class="bar3"></div>
-                        <div class="bar4"></div>
-                        <div class="bar5"></div>
-                        <div class="bar6"></div>
-                        <div class="bar7"></div>
-                        <div class="bar8"></div>
+                    <div class="loader-inner pacman">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
                 </div>`;
     }
