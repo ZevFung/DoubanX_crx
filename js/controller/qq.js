@@ -52,7 +52,11 @@ class QQ {
                 $target.data('allow', true);
                 $target.data('movein', false);
                 setTimeout(() => {
-                    if ($target.data('allow') && !$target.data('loading')) {
+                    if ($target.data('allow')) {
+                        if ($target.data('loading')) {
+                            new Template().showTips($target, 'loading');
+                            return;
+                        }
                         $target.data('allow', false);
                         $target.data('loading', true);
                         new Template().showTips($target, 'loading');

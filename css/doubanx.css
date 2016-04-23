@@ -235,6 +235,7 @@
 }
 
 #subject-tip h3 {
+    word-break: break-all;
     font-weight: 400;
     font-size: 16px;
     color: #111;
