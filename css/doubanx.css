@@ -61,6 +61,11 @@
 .bigstar00 {
     background-position:0 -150px
 }
+.subject-rating {
+    color: #e09015;
+    font-size: 12px;
+    margin-left: 2px;
+}
 #interest_sectl {
     width: 160px;
     color:#9b9b9b;
@@ -213,6 +218,71 @@
     line-height: 1.7em
 }
 
+#subject-tip {
+    position: absolute;
+    top: 0;
+    z-index: 99999;
+    max-width: 200px;
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 0px 0px 10px #ccc;
+    border: 1px solid #ddd;
+}
+
+#subject-tip .rating_logo {
+    color: #9b9b9b;
+    margin-bottom: 10px;
+}
+
+#subject-tip h3 {
+    font-weight: 400;
+    font-size: 16px;
+    color: #111;
+    height: auto;
+    margin-left: 0
+}
+
+#subject-tip .release-year {
+    font-size: 12px;
+    margin-left: 8px;
+    color: #aaa
+}
+
+#subject-tip .rater-num {
+    color: #111;
+    margin-left: 2px
+}
+
+#subject-tip .subject-intro {
+    margin-top: 08px;
+    padding: 10px;
+    background-color: #f7f7f7;
+    color: #111
+}
+
+#subject-tip .star {
+    margin: 7px 0 10px
+}
+.subject-star {
+    vertical-align: top;
+}
+.subject-tip-bd li {
+    padding-left: 40px;
+    line-height: 20px;
+    overflow: hidden;
+    zoom: 1;
+    color: #111
+}
+
+.subject-tip-bd li span {
+    margin-right: 5px
+}
+
+.subject-tip-bd li .label {
+    margin-left: -40px;
+    float: left;
+    padding: 0
+}
 
 .animated {
     -webkit-animation-duration: 0.5s;
@@ -304,4 +374,77 @@
 .fadeIn {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
+}
+
+
+/* Loading */
+.bar1 {
+  -webkit-transform:rotate(0deg) translate(0, -40px);opacity:0.12;
+}
+.bar2 {
+  -webkit-transform:rotate(45deg) translate(0, -40px);opacity:0.25;
+}
+.bar3 {
+  -webkit-transform:rotate(90deg) translate(0, -40px);opacity:0.37;
+}
+.bar4 {
+  -webkit-transform:rotate(135deg) translate(0, -40px);opacity:0.50;
+}
+.bar5 {
+  -webkit-transform:rotate(180deg) translate(0, -40px);opacity:0.62;
+}
+.bar6 {
+  -webkit-transform:rotate(225deg) translate(0, -40px);opacity:0.75;
+}
+.bar7 {
+  -webkit-transform:rotate(270deg) translate(0, -40px);opacity:0.87;
+}
+.bar8 {
+  -webkit-transform:rotate(315deg) translate(0, -40px);opacity:1;
+}
+
+#loading {
+    float: none;
+    padding: 0;
+    margin: 0 auto;
+    position:relative;
+    width:100px;
+    height:100px;
+    -webkit-border-radius:100px;
+    -webkit-transform:scale(0.5);
+
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration:1s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+}
+#loading div {
+    width:20px;
+    height:20px;
+    background:#000;
+    -webkit-border-radius:40px;
+    position:absolute;
+    left:40px;
+    top:40px;
+}
+
+#loading .bar1 {
+  -webkit-transform:rotate(0deg)   translate(0, -40px) scale(0.1);opacity:0.12;}
+#loading .bar2 {
+  -webkit-transform:rotate(45deg)  translate(0, -40px) scale(0.2);opacity:0.25;}
+#loading .bar3 {
+  -webkit-transform:rotate(90deg)  translate(0, -40px) scale(0.4);opacity:0.37;}
+#loading .bar4 {
+  -webkit-transform:rotate(135deg) translate(0, -40px) scale(0.6);opacity:0.50;}
+#loading .bar5 {
+  -webkit-transform:rotate(180deg) translate(0, -40px) scale(0.8);opacity:0.62;}
+#loading .bar6 {
+  -webkit-transform:rotate(225deg) translate(0, -40px) scale(1);opacity:0.75;}
+#loading .bar7 {
+  -webkit-transform:rotate(270deg) translate(0, -40px) scale(1.2);opacity:0.87;}
+#loading .bar8 {
+  -webkit-transform:rotate(315deg) translate(0, -40px) scale(1.4);opacity:1;}
+@-webkit-keyframes rotate {
+    from {-webkit-transform:scale(0.5) rotate(0deg);}
+    to {-webkit-transform:scale(0.5) rotate(360deg);}
 }

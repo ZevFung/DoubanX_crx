@@ -164,10 +164,19 @@ class DoubanX {
         }
     }
 
-    getIntroOffline() {
-        return false;
+    /**
+     * 从本地缓存中获取豆瓣简介
+     */
+    getIntroOffline(callback) {
+        const key = `${this.name}_${this.type}_intro`;
+        return this.getOffline(key, (data) => {
+            callback(data);
+        });
     }
 
+    /**
+     * 实时获取豆瓣简介
+     */
     getIntroOnline(callback) {
         const key = `${this.name}_${this.type}_intro`;
         const url = this.api.getIntro;
@@ -185,14 +194,13 @@ class DoubanX {
         const that = this;
         // 优先读取缓存
         const inCache = that.getIntroOffline((intro) => {
-            // callback(intro);
+            callback(intro);
         });
 
         // 没有缓存则实时获取
         if (!inCache) {
             that.getIntroOnline((intro) => {
                 callback(intro);
-                console.log(intro);
             });
         }
     }

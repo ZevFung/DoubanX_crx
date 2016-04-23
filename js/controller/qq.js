@@ -3,46 +3,46 @@ class QQ {
         this.isFilm = window.location.host === 'film.qq.com';
         this.isVideo = window.location.host === 'v.qq.com';
         this.page = {
-            video: document.querySelectorAll('#mod_player').length > 0,     // 播放页
-            tv: (document.querySelectorAll('#mod_player').length > 0) &&
-                (document.querySelectorAll('.album_list li').length > 0),   // 电视剧
-            movie: (document.querySelectorAll('#mod_player').length > 0) &&
-                (document.querySelectorAll('.album_list li').length === 0), // 电影
-            list: document.querySelectorAll('ul.movie_list').length > 0     // 列表页
+            video: $('#mod_player').length > 0,     // 播放页
+            tv: ($('#mod_player').length > 0) &&
+                ($('.album_list li').length > 0),   // 电视剧
+            movie: ($('#mod_player').length > 0) &&
+                ($('.album_list li').length === 0), // 电影
+            list: $('ul.movie_list').length > 0     // 列表页
         };
     }
 
     main() {
         if (this.isFilm && this.page.movie) {
             new DoubanX({
-                name: document.querySelector('.player_title').innerText,
+                name: $('.player_title').text(),
                 type: 'movie'
             }).getRate();
         }
 
         if (this.isFilm && this.page.tv) {
             new DoubanX({
-                name: document.querySelector('.album_title').innerText,
+                name: $('.album_title').text(),
                 type: 'movie'
             }).getRate();
         }
 
         if (this.isVideo && this.page.tv) {
             new DoubanX({
-                name: document.querySelector('.intro_title .title_inner').innerText,
+                name: $('.intro_title .title_inner').text(),
                 type: 'movie'
             }).getRate();
         }
 
         if (this.isVideo && this.page.movie) {
             new DoubanX({
-                name: document.querySelector('#h1_title').innerText,
+                name: $('#h1_title').text(),
                 type: 'movie'
             }).getRate();
         }
 
         if (this.isFilm && this.page.list) {
-            document.addEventListener('mouseover', (ev) => {
+            $('body').on('mouseover', 'ul.movie_list li', (ev) => {
                 const $target = $(ev.target);
                 const $list = $target.parents('ul.movie_list li');
                 if ($list.length !== 0) {
@@ -51,23 +51,26 @@ class QQ {
                         if ($list.data('allow') && !$list.data('loading')) {
                             $list.data('allow', false);
                             $list.data('loading', true);
+                            new Template().showLoadIntro($list);
                             new DoubanX({
                                 name: $list.find('h4.name a').text(),
                                 type: 'movie'
-                            }).getIntro(() => {
+                            }).getIntro((data) => {
                                 $list.data('allow', true);
                                 $list.data('loading', false);
+                                new Template(data).showMovieIntro($list);
                             });
                         }
                     }, 300);
                 }
             });
 
-            document.addEventListener('mouseout', (ev) => {
+            $('body').on('mouseout', 'ul.movie_list li', (ev) => {
                 const $target = $(ev.target);
                 const $list = $target.parents('ul.movie_list li');
                 if ($list.length !== 0) {
                     $list.data('allow', false);
+                    $('#subject-tip').remove();
                 }
             });
         }

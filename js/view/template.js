@@ -14,45 +14,106 @@ class Template {
      * 显示豆瓣评分
      */
     showRate() {
-        let el = document.createElement('div');
-        el.innerHTML = this.renderRate();
-        document.querySelector('body').appendChild(el.childNodes[0]);
-        // 事件绑定
-        document.querySelector('body').addEventListener('click', (ev) => {
-            if (ev.target &&
-                ev.target.className === 'interest_close' &&
-                document.querySelector('#interest_sectl')
-                ) {
-                document.querySelector('#interest_sectl').className = 'animated fadeOutRightBig';
-                setTimeout(() => {
-                    document.querySelector('body').removeChild(
-                        document.querySelector('#interest_sectl')
-                    );
-                }, 500);
-            }
+        const $body = $('body');
+        $body.append(this.renderRate());
+        const $rate = $('#interest_sectl');
+        $body.on('click', '.interest_close', (ev) => {
+            ev.preventDefault();
+            $rate.toggleClass('animated fadeOutRightBig');
+            setTimeout(() => {
+                $rate.remove();
+            }, 500);
         });
+
+        setTimeout(() => {
+            $rate.toggleClass('animated fadeInRightBig');
+        }, 500);
     }
 
     /**
      * 显示豆瓣评论
      */
     showReview(data) {
-        let el = document.createElement('div');
-        el.innerHTML = this.renderReview();
-        document.querySelector('#interest_sectl').appendChild(el.childNodes[0]);
-
-        const windowHeight = window.document.documentElement.clientHeight;
-        const doubanHeight = document.querySelector('#interest_sectl').offsetHeight;
+        const $rate = $('#interest_sectl');
+        $rate.append(this.renderReview());
+        const windowH = $(window).height();
+        const doubanH = $rate.height();
         // 上下至少各预留 100px
-        if (windowHeight < doubanHeight + 100 &&
-            windowHeight > 340
+        if (windowH < doubanH + 100 &&
+            windowH > 340
         ) {
-            document.querySelector('#interest_sectl ul').style.maxHeight = (windowHeight - 340) + 'px';
+            $rate.find('ul').css({
+                maxHeight: (windowH - 340) + 'px'
+            });
+        }
+    }
+
+    /**
+     * 显示电影简介
+     */
+    showMovieIntro($list) {
+        this.showTips($list, 'movie', false);
+    }
+
+    /**
+     * 显示图书简介
+     */
+    showBookIntro($list) {
+        this.showTips($list, 'book', false);
+    }
+
+    /**
+    * 显示简介前的Loading
+    */
+    showLoadIntro($list) {
+       this.showTips($list, 'movie', true);
+    }
+
+    /**
+     * 显示简介浮层
+     */
+    showTips($list, type, loading) {
+        let renderOutput = '';
+        if (loading) {
+            renderOutput = this.renderLoadIntro();
+        } else {
+            if (type === 'movie') {
+                renderOutput = this.renderMovieIntro();
+            } else if (type === 'book'){
+                renderOutput = this.renderBookIntro();
+            }
         }
 
-        setTimeout(() => {
-            document.querySelector('#interest_sectl').className = '';
-        }, 500);
+        $('#subject-tip').remove();
+        const $body = $('body');
+        $body.append(renderOutput);
+        const bodyW = $body.width();
+
+        const listT = $list.offset().top;
+        const listL = $list.offset().left;
+        const listW = $list.width();
+        const listH = $list.height();
+
+        const $tips = $('#subject-tip');
+        const tipsW = $tips.width();
+        const tipsH = $tips.height();
+
+        if (bodyW - (listW + listL) > listW)
+        // 优先在右侧展示
+        {
+            $tips.css({
+                top: listT,
+                left: listW + listL + 10
+            });
+        }
+        // 其次在左侧展示
+        else if (listL > listW)
+        {
+            $tips.css({
+                top: listT,
+                left: listL - tipsW - 10
+            });
+        }
     }
 
     /**
@@ -138,6 +199,88 @@ class Template {
                     </div>
                     <div class="comment-ft">
                         <a href="https://${data.rate.type}.douban.com/subject/${data.rate.id}/reviews" class="comment-more" target="_blank">查看更多评论&raquo;</a>
+                    </div>
+                </div>`;
+    }
+
+    /**
+     * 渲染电影简介
+     */
+    renderMovieIntro() {
+        const data = this.data;
+        let title = '';
+        let genres = '';
+        let directors = '';
+        let directorsArr = [];
+        let casts = '';
+        let castsArr = [];
+
+        title = data.title === data.original_title ? data.title : `${data.title}(${data.original_title})`;
+        data.directors.forEach((director) => {
+            directorsArr.push(director.name);
+        });
+        data.casts.forEach((cast) => {
+            castsArr.push(cast.name);
+        });
+        genres = data.genres.join(' / ');
+        directors = directorsArr.join(' / ');
+        casts = castsArr.join(' / ');
+
+        genres = genres !== '' ? `<li>
+                                    <span class="label">类型：</span>
+                                    <span>${genres}</span>
+                                </li>` : '';
+        directors = directors !== '' ? `<li>
+                                            <span class="label">导演：</span>
+                                            <span>${directors}</span>
+                                        </li>` : '';
+        casts = casts !== '' ? `<li>
+                                    <span class="label">主演：</span>
+                                    <span>${casts}</span>
+                                </li>` : '';
+
+
+        return `<div id="subject-tip">
+                    <div class="rating_logo">豆瓣简介</div>
+                    <div class="subject-tip-hd">
+                        <h3>${title}<span class="release-year">${data.year}</span></h3>
+                        <p class="star">
+                            <span class="subject-star bigstar${data.rating.stars}"></span>
+                            <span class="subject-rating">${Number(data.rating.average).toFixed(1)}</span>
+                            <span class="rater-num">(${data.collect_count}人评价)</span>
+                        </p>
+                    </div>
+                    <div class="subject-tip-bd">
+                        <ul>
+                            ${genres}
+                            ${directors}
+                            ${casts}
+                        </ul>
+                    </div>
+                </div>`;
+    }
+
+    /**
+     * 渲染图书简介
+     */
+     renderBookIntro() {
+
+     }
+
+    /**
+     * 渲染简介前的Loading
+     */
+    renderLoadIntro() {
+        return `<div id="subject-tip">
+                    <div id="loading">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                        <div class="bar4"></div>
+                        <div class="bar5"></div>
+                        <div class="bar6"></div>
+                        <div class="bar7"></div>
+                        <div class="bar8"></div>
                     </div>
                 </div>`;
     }
