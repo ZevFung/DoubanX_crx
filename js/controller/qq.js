@@ -10,9 +10,8 @@ class QQ {
                 ($('.album_list li').length === 0)  // 电影
         };
         this.reg = {
-            isFilm: /^http:\/\/film\.qq\.com\/cover\/.*\.html/,
-            isVideo: /^http:\/\/v\.qq\.com\/cover\/.*\.html/,
-            isSearch: /^http:\/\//
+            isFilm: /(^http:\/\/film\.qq\.com)*\/cover\/.*\.html/i,
+            isVideo: /^http:\/\/v\.qq\.com\/(cover|prev)\/.*\.html/i
         };
     }
 
