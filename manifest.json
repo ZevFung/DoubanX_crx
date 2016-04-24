@@ -19,6 +19,11 @@
             "matches": [
                 "http://film.qq.com/*",
                 "http://v.qq.com/*",
+                "http://www.youku.com/v_olist/c_96*",
+                "http://www.youku.com/v_olist/c_97*",
+                "http://www.youku.com/show_page/*",
+                "http://movie.youku.com/*",
+                "http://tv.youku.com/*",
                 "http://v.youku.com/v_show/*",
                 "http://www.tudou.com/albumplay/*",
                 "http://www.iqiyi.com/*",
@@ -36,7 +41,8 @@
             "js": [
                 "js/lib/zepto.min.js",
                 "js/view/template.js",
-                "js/model/doubanx.js"
+                "js/model/doubanx.js",
+                "js/base/common.js"
             ]
         },
         {
@@ -44,7 +50,7 @@
             "js": [ "js/controller/qq.js" ]
         },
         {
-            "matches": [ "http://v.youku.com/v_show/*" ],
+            "matches": [ "http://www.youku.com/v_olist/c_96*", "http://www.youku.com/v_olist/c_97*", "http://www.youku.com/show_page/*", "http://v.youku.com/v_show/*", "http://movie.youku.com/*", "http://tv.youku.com/*" ],
             "js": [ "js/controller/youku.js" ]
         },
         {

@@ -201,11 +201,7 @@
     overflow: hidden
 }
 
-#comment-list-wrapper .comment-list.noshow {
-    display: none
-}
-
-#comment-list-wrapper .comment-list.show {
+#comment-list-wrapper .comment-list {
     margin-top: 10px;
     display: block
 }

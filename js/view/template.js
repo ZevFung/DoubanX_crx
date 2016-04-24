@@ -88,7 +88,7 @@ class Template {
         const tipsW = $tips.width();
         const tipsH = $tips.height();
 
-        if (bodyW - (listW + listL) > listW)
+        if (bodyW - (listW + listL) > tipsW)
         // 优先在右侧展示
         {
             $tips.css({
@@ -182,7 +182,7 @@ class Template {
         });
         return `<div id="comment-list-wrapper" class="indent animated fadeIn">
                     <div class="rating_logo">豆瓣热评</div>
-                    <div class="comment-list show">
+                    <div class="comment-list">
                         <ul>
                             ${list}
                         </ul>
