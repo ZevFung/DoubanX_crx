@@ -9,11 +9,16 @@ class Tudou {
     main() {
         if (this.isTudou && this.page.video) {
             new DoubanX({
-                name: document.querySelector('#videoKw a').innerText,
+                name: $('#videoKw a').text(),
                 type: 'movie'
             }).getRate();
         }
 
+        Common.listHandle(
+            /^http:\/\/www\.tudou\.com\/albumplay\/.*\.html/i,
+            'li',
+            'movie'
+        );
     }
 }
 

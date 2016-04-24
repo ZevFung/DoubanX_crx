@@ -25,6 +25,8 @@
                 "http://movie.youku.com/*",
                 "http://tv.youku.com/*",
                 "http://v.youku.com/v_show/*",
+                "http://movie.tudou.com/*",
+                "http://tv.tudou.com/*",
                 "http://www.tudou.com/albumplay/*",
                 "http://www.iqiyi.com/*",
                 "http://www.le.com/ptv/vplay/*",
@@ -54,7 +56,7 @@
             "js": [ "js/controller/youku.js" ]
         },
         {
-            "matches": [ "http://www.tudou.com/albumplay/*" ],
+            "matches": [ "http://movie.tudou.com/*", "http://tv.tudou.com/*", "http://www.tudou.com/albumplay/*" ],
             "js": [ "js/controller/tudou.js" ]
         },
         {
