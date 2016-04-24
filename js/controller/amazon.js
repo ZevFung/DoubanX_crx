@@ -2,14 +2,14 @@ class Amazon {
     constructor() {
         this.isAmazon = window.location.host === 'www.amazon.cn';
         this.page = {
-            book: document.querySelector('#productTitle, #ebooksProductTitle')
+            book: $('#productTitle, #ebooksProductTitle').length > 0
         };
     }
 
     main() {
         if (this.isAmazon && this.page.book) {
             new DoubanX({
-                name: document.querySelector('#productTitle, #ebooksProductTitle').innerText,
+                name: $('#productTitle, #ebooksProductTitle').text(),
                 type: 'book'
             }).getRate();
         }

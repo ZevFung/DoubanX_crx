@@ -97,7 +97,7 @@ class Template {
             });
         }
         // 其次在左侧展示
-        else if (listL > listW)
+        else if (listL > tipsW)
         {
             $tips.css({
                 top: listT,
@@ -276,6 +276,9 @@ class Template {
      */
     renderLoadIntro() {
         return `<div id="subject-tip">
+                    <div class="rating_logo">
+                        豆瓣影视图书小助手正努力搜索中...
+                    </div>
                     <div class="loader-inner pacman">
                         <div></div>
                         <div></div>

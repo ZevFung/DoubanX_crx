@@ -61,7 +61,7 @@ class QQ {
                         $target.data('loading', true);
                         new Template().showTips($target, 'loading');
                         new DoubanX({
-                            name: $link.attr('title') || $link.text(),
+                            name: $link.attr('title') || $link.find('img').attr('alt') || $link.text(),
                             type: 'movie'
                         }).getIntro((data) => {
                             $target.data('allow', true);
