@@ -9,7 +9,11 @@ class QQ {
             movie: ($('#mod_player').length > 0) &&
                 ($('.album_list li').length === 0)  // 电影
         };
-        this.reg = /^http:\/\/(film|v)\.qq\.com\/cover\/.*\.html/;
+        this.reg = {
+            isFilm: /^http:\/\/film\.qq\.com\/cover\/.*\.html/,
+            isVideo: /^http:\/\/v\.qq\.com\/cover\/.*\.html/,
+            isSearch: /^http:\/\//
+        };
     }
 
     main() {
@@ -46,7 +50,8 @@ class QQ {
             const $target = $(ev.currentTarget);
             const $link = $target.find('a').eq(0);
             const href = $.trim($link.attr('href'));
-            const isMovie = that.reg.test(href);
+            const isMovie = that.reg.isFilm.test(href) ||
+                            that.reg.isVideo.test(href);
 
             if (isMovie) {
                 $target.data('allow', true);
@@ -61,7 +66,10 @@ class QQ {
                         $target.data('loading', true);
                         new Template().showTips($target, 'loading');
                         new DoubanX({
-                            name: $link.attr('title') || $link.find('img').attr('alt') || $link.text(),
+                            name: $link.attr('title') ||
+                                  $link.find('img').attr('alt') ||
+                                  $link.find('.title').text() ||
+                                  $link.text(),
                             type: 'movie'
                         }).getIntro((data) => {
                             $target.data('allow', true);
@@ -85,7 +93,8 @@ class QQ {
             const $target = $(ev.currentTarget);
             const $link = $target.find('a').eq(0);
             const href = $.trim($link.attr('href'));
-            const isMovie = that.reg.test(href);
+            const isMovie = that.reg.isFilm.test(href) ||
+                            that.reg.isVideo.test(href);
 
             if (isMovie) {
                 $target.data('allow', false);
