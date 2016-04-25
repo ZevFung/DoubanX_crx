@@ -18,7 +18,7 @@ class Iqiyi {
 
         Common.listHandle(
             /(^http:\/\/(www|vip|so)\.iqiyi\.com)*\/(v_|dianying|so|\d+)/i,
-            'qchunk .site-piclist li, .search_result_side li',
+            'qchunk li, .search_result_side li',
             'movie'
         );
     }
