@@ -20,10 +20,11 @@ class Common {
                         $target.data('loading', true);
                         new Template().showTips($target, 'loading');
                         new DoubanX({
-                            name: $link.attr('title') ||
-                                  $link.find('img').attr('alt') ||
-                                  $link.find('.title').text() ||
-                                  $link.text(),
+                            name: $.trim($link.attr('title')) ||
+                                  $.trim($link.find('img').attr('alt')) ||
+                                  $.trim($link.find('.title').text()) ||
+                                  $.trim($link.find('.info h2').text()) ||
+                                  $.trim($link.text()),
                             type: type
                         }).getIntro((data) => {
                             $target.data('allow', true);

@@ -54,7 +54,7 @@ class DoubanX {
                     callback(data);
                     localStorage.setItem(key, JSON.stringify(data.data));
                 } else {
-                    error && error();
+                    if (typeof error === 'function') { error(); }
                 }
             }
         };
