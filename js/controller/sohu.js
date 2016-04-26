@@ -20,6 +20,11 @@ class Sohu {
                 type: 'movie'
             }).getRate();
         }
+        Common.listHandle(
+            /^http:\/\/(tv|film)\.sohu\.com\/.*/i,
+            '.lisi, .plid, .No1, .itembox.tv li, .itembox.movie li, .itembox.yugao li, .ranklist li, .G_list1 li, .G_list3 li',
+            'movie'
+        );
     }
 }
 

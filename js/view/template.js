@@ -218,15 +218,15 @@ class Template {
         casts = castsArr.join(' / ');
 
         genres = genres !== '' ? `<li>
-                                    <span class="label">类型：</span>
+                                    <span class="douban-label">类型：</span>
                                     <span>${genres}</span>
                                 </li>` : '';
         directors = directors !== '' ? `<li>
-                                            <span class="label">导演：</span>
+                                            <span class="douban-label">导演：</span>
                                             <span>${directors}</span>
                                         </li>` : '';
         casts = casts !== '' ? `<li>
-                                    <span class="label">主演：</span>
+                                    <span class="douban-label">主演：</span>
                                     <span>${casts}</span>
                                 </li>` : '';
         average = data.rating.average === 0 ? '' : `<span class="subject-rating">${Number(data.rating.average).toFixed(1)}</span>`;
@@ -236,7 +236,7 @@ class Template {
                     <div class="rating_logo">豆瓣简介</div>
                     <div class="subject-tip-hd">
                         <h3>${title}<span class="release-year">${data.year}</span></h3>
-                        <p class="star">
+                        <p class="douban-star">
                             <span class="subject-star bigstar${data.rating.stars}"></span>
                             ${average}
                             <span class="rater-num">(${data.collect_count}人评价)</span>

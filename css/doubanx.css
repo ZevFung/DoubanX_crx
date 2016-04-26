@@ -256,7 +256,7 @@
     color: #111
 }
 
-#subject-tip .star {
+#subject-tip .douban-star {
     margin: 7px 0 10px
 }
 .subject-star {
@@ -274,7 +274,7 @@
     margin-right: 5px
 }
 
-.subject-tip-bd li .label {
+.subject-tip-bd li .douban-label {
     color: #666;
     margin-left: -40px;
     float: left;
