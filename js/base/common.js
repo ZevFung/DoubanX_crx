@@ -32,7 +32,7 @@ class Common {
                             $target.data('allow', true);
                             $target.data('loading', false);
                             if (!$target.data('movein')) {
-                                new Template(data).showTips($target, 'movie');
+                                new Template(data).showTips($target, type);
                             }
                         }, () => {
                             $target.data('allow', true);

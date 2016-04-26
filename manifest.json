@@ -1,10 +1,10 @@
 {
     "name": "豆瓣影视图书小助手",
     "short_name": "DoubanX",
-    "description": "在视频播放页以及图书详情页显示当前视频或图书在豆瓣对应的评分、评星、评论等信息。在视频列表页显示对应的豆瓣评星和简介。（目前电影、电视剧支持腾讯、优酷、土豆、爱奇艺、乐视、搜狐，图书支持亚马逊、京东、当当网）",
+    "description": "在视频播放页以及图书详情页显示当前视频或图书在豆瓣对应的评分、评星、评论等信息。在视频和图书列表页显示对应的豆瓣评星和简介。（目前电影、电视剧支持腾讯、优酷、土豆、爱奇艺、乐视、搜狐，图书支持亚马逊、京东、当当网）",
     "homepage_url": "https://github.com/wange1228/doubanx_crx",
     "author": "i@wange.im",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "manifest_version": 2,
     "icons": {
         "16": "img/doubanx.png",
@@ -49,6 +49,7 @@
                 "https://www.amazon.cn/*",
 
                 "http://product.dangdang.com/*",
+                "http://book.dangdang.com/*",
 
                 "http://item.jd.com/*",
                 "http://re.jd.com/cps/item/*",
@@ -139,7 +140,8 @@
         },
         {
             "matches": [
-                "http://product.dangdang.com/*"
+                "http://product.dangdang.com/*",
+                "http://book.dangdang.com/*"
             ],
             "js": [
                 "js/controller/dangdang.js"
