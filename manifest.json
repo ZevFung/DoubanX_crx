@@ -1,7 +1,7 @@
 {
     "name": "豆瓣影视图书小助手",
     "short_name": "DoubanX",
-    "description": "在视频播放页以及图书详情页显示当前视频或图书在豆瓣对应的评分、评星、评论等信息。（目前电影、电视剧支持腾讯、优酷、土豆、爱奇艺、乐视、搜狐，图书支持亚马逊、京东、当当网）",
+    "description": "在视频播放页以及图书详情页显示当前视频或图书在豆瓣对应的评分、评星、评论等信息。在视频和图书的列表页显示对应的豆瓣评星和简介。（目前电影、电视剧支持腾讯、优酷、土豆、爱奇艺、乐视、搜狐，图书支持亚马逊、京东、当当网）",
     "homepage_url": "https://github.com/wange1228/doubanx_crx",
     "author": "i@wange.im",
     "version": "1.0.0",
@@ -19,31 +19,41 @@
             "matches": [
                 "http://film.qq.com/*",
                 "http://v.qq.com/*",
+
                 "http://www.youku.com/v_olist/c_96*",
                 "http://www.youku.com/v_olist/c_97*",
                 "http://www.youku.com/show_page/*",
                 "http://movie.youku.com/*",
                 "http://tv.youku.com/*",
                 "http://v.youku.com/v_show/*",
+
                 "http://movie.tudou.com/*",
                 "http://tv.tudou.com/*",
                 "http://www.tudou.com/albumplay/*",
+
                 "http://www.iqiyi.com/*",
                 "http://list.iqiyi.com/www/1/*",
                 "http://list.iqiyi.com/www/2/*",
                 "http://vip.iqiyi.com/*",
                 "http://so.iqiyi.com/so/*",
+
                 "http://www.le.com/ptv/vplay/*",
+
                 "http://tv.sohu.com/*",
                 "http://film.sohu.com/album/*",
+
                 "http://www.amazon.cn/*",
                 "https://www.amazon.cn/*",
+
                 "http://product.dangdang.com/*",
+                
                 "http://item.jd.com/*",
                 "http://re.jd.com/cps/item/*",
                 "http://e.jd.com/*"
             ],
-            "css": ["css/doubanx.css"],
+            "css": [
+                "css/doubanx.css"
+            ],
             "js": [
                 "js/lib/zepto.min.js",
                 "js/view/template.js",
@@ -52,40 +62,92 @@
             ]
         },
         {
-            "matches": [ "http://film.qq.com/*", "http://v.qq.com/*" ],
-            "js": [ "js/controller/qq.js" ]
+            "matches": [
+                "http://film.qq.com/*",
+                "http://v.qq.com/*"
+            ],
+            "js": [
+                "js/controller/qq.js"
+            ]
         },
         {
-            "matches": [ "http://www.youku.com/v_olist/c_96*", "http://www.youku.com/v_olist/c_97*", "http://www.youku.com/show_page/*", "http://v.youku.com/v_show/*", "http://movie.youku.com/*", "http://tv.youku.com/*" ],
-            "js": [ "js/controller/youku.js" ]
+            "matches": [
+                "http://www.youku.com/v_olist/c_96*",
+                "http://www.youku.com/v_olist/c_97*",
+                "http://www.youku.com/show_page/*",
+                "http://v.youku.com/v_show/*",
+                "http://movie.youku.com/*",
+                "http://tv.youku.com/*"
+            ],
+            "js": [
+                "js/controller/youku.js"
+            ]
         },
         {
-            "matches": [ "http://movie.tudou.com/*", "http://tv.tudou.com/*", "http://www.tudou.com/albumplay/*" ],
-            "js": [ "js/controller/tudou.js" ]
+            "matches": [
+                "http://movie.tudou.com/*",
+                "http://tv.tudou.com/*",
+                "http://www.tudou.com/albumplay/*"
+            ],
+            "js": [
+                "js/controller/tudou.js"
+            ]
         },
         {
-            "matches": [ "http://www.iqiyi.com/*", "http://vip.iqiyi.com/*", "http://so.iqiyi.com/so/*", "http://list.iqiyi.com/www/1/*", "http://list.iqiyi.com/www/2/*" ],
-            "js": [ "js/controller/iqiyi.js" ]
+            "matches": [
+                "http://www.iqiyi.com/*",
+                "http://vip.iqiyi.com/*",
+                "http://so.iqiyi.com/so/*",
+                "http://list.iqiyi.com/www/1/*",
+                "http://list.iqiyi.com/www/2/*"
+            ],
+            "js": [
+                "js/controller/iqiyi.js"
+            ]
         },
         {
-            "matches": [ "http://www.le.com/ptv/vplay/*" ],
-            "js": [ "js/controller/leshi.js" ]
+            "matches": [
+                "http://www.le.com/ptv/vplay/*"
+            ],
+            "js": [
+                "js/controller/leshi.js"
+            ]
         },
         {
-            "matches": [ "http://tv.sohu.com/*", "http://film.sohu.com/album/*" ],
-            "js": [ "js/controller/sohu.js" ]
+            "matches": [
+                "http://tv.sohu.com/*",
+                "http://film.sohu.com/album/*"
+            ],
+            "js": [
+                "js/controller/sohu.js"
+            ]
         },
         {
-            "matches": [ "http://www.amazon.cn/*", "https://www.amazon.cn/*" ],
-            "js": [ "js/controller/amazon.js" ]
+            "matches": [
+                "http://www.amazon.cn/*",
+                "https://www.amazon.cn/*"
+            ],
+            "js": [
+                "js/controller/amazon.js"
+            ]
         },
         {
-            "matches": [ "http://product.dangdang.com/*" ],
-            "js": [ "js/controller/dangdang.js" ]
+            "matches": [
+                "http://product.dangdang.com/*"
+            ],
+            "js": [
+                "js/controller/dangdang.js"
+            ]
         },
         {
-            "matches": [ "http://item.jd.com/*", "http://re.jd.com/cps/item/*", "http://e.jd.com/*" ],
-            "js": [ "js/controller/jd.js" ]
+            "matches": [
+                "http://item.jd.com/*",
+                "http://re.jd.com/cps/item/*",
+                "http://e.jd.com/*"
+            ],
+            "js": [
+                "js/controller/jd.js"
+            ]
         }
     ]
 }
