@@ -13,6 +13,12 @@ class Leshi {
                 type: 'movie'
             }).getRate();
         }
+
+        Common.listHandle(
+            /^http:\/\/www\.(le|letv)\.com\/(ptv\/vplay|tv)\/.*\.html/i,
+            '.dl_list, dl.dl_temp, .rank li, .le_resp a, .rank-list li',
+            'movie'
+        );
     }
 }
 

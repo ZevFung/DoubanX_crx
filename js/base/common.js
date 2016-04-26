@@ -4,7 +4,8 @@ class Common {
     static listHandle(reg, tag, type) {
         $('body').on('mouseover', tag, (ev) => {
             const $target = $(ev.currentTarget);
-            const $link = $target.find('a').eq(0);
+            const $link = $target.find('a').eq(0).length !== 0 ?
+                          $target.find('a').eq(0) : $target;
             const href = $.trim($link.attr('href'));
 
             if (reg.test(href)) {
@@ -46,7 +47,8 @@ class Common {
 
         $('body').on('mouseout', tag, (ev) => {
             const $target = $(ev.currentTarget);
-            const $link = $target.find('a').eq(0);
+            const $link = $target.find('a').eq(0).length !== 0 ?
+                          $target.find('a').eq(0) : $target;
             const href = $.trim($link.attr('href'));
 
             if (reg.test(href)) {

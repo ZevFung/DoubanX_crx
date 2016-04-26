@@ -38,6 +38,9 @@
                 "http://so.iqiyi.com/so/*",
 
                 "http://www.le.com/ptv/vplay/*",
+                "http://list.le.com/listn/c1_*",
+                "http://list.le.com/listn/c2_*",
+                "http://tv.le.com/*",
 
                 "http://tv.sohu.com/*",
                 "http://film.sohu.com/album/*",
@@ -46,7 +49,7 @@
                 "https://www.amazon.cn/*",
 
                 "http://product.dangdang.com/*",
-                
+
                 "http://item.jd.com/*",
                 "http://re.jd.com/cps/item/*",
                 "http://e.jd.com/*"
@@ -107,7 +110,10 @@
         },
         {
             "matches": [
-                "http://www.le.com/ptv/vplay/*"
+                "http://www.le.com/ptv/vplay/*",
+                "http://list.le.com/listn/c1_*",
+                "http://list.le.com/listn/c2_*",
+                "http://tv.le.com/*"
             ],
             "js": [
                 "js/controller/leshi.js"
