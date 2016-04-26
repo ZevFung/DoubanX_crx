@@ -29,6 +29,8 @@
                 "http://tv.tudou.com/*",
                 "http://www.tudou.com/albumplay/*",
                 "http://www.iqiyi.com/*",
+                "http://list.iqiyi.com/www/1/*",
+                "http://list.iqiyi.com/www/2/*",
                 "http://vip.iqiyi.com/*",
                 "http://so.iqiyi.com/so/*",
                 "http://www.le.com/ptv/vplay/*",
@@ -62,7 +64,7 @@
             "js": [ "js/controller/tudou.js" ]
         },
         {
-            "matches": [ "http://www.iqiyi.com/*", "http://vip.iqiyi.com/*", "http://so.iqiyi.com/so/*" ],
+            "matches": [ "http://www.iqiyi.com/*", "http://vip.iqiyi.com/*", "http://so.iqiyi.com/so/*", "http://list.iqiyi.com/www/1/*", "http://list.iqiyi.com/www/2/*" ],
             "js": [ "js/controller/iqiyi.js" ]
         },
         {
