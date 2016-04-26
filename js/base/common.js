@@ -26,6 +26,7 @@ class Common {
                                   $.trim($link.find('.title').text()) ||
                                   $.trim($link.find('.info h2').text()) ||
                                   $.trim($target.find('.p_bt a').text()) ||
+                                  $.trim($target.find('.title a').text()) ||
                                   $.trim($link.text()),
                             type: type
                         }).getIntro((data) => {

@@ -50,6 +50,8 @@
 
                 "http://product.dangdang.com/*",
                 "http://book.dangdang.com/*",
+                "http://v.dangdang.com/*",
+                "http://e.dangdang.com/*",
 
                 "http://item.jd.com/*",
                 "http://re.jd.com/cps/item/*",
@@ -141,7 +143,9 @@
         {
             "matches": [
                 "http://product.dangdang.com/*",
-                "http://book.dangdang.com/*"
+                "http://book.dangdang.com/*",
+                "http://v.dangdang.com/*",
+                "http://e.dangdang.com/*"
             ],
             "js": [
                 "js/controller/dangdang.js"

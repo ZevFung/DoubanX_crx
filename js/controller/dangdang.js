@@ -14,8 +14,8 @@ class Dangdang {
             }).getRate();
         }
         Common.listHandle(
-            /^http:\/\/product\.dangdang\.com\/.*\.html/i,
-            'li',
+            /(^http:\/\/product\.dangdang\.com\/.*\.html|^http:\/\/a\.dangdang\.com\/jump\.php\?.*|^\/product\/\.\/\d*\.html|^\.\/product\/\d*\.html)/i,
+            '.product_ul li, .list_aa li, .list_ab li, .index_smallcell_module, .list_content h3, .book_list a',
             'book'
         );
     }
