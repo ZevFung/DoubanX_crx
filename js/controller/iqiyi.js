@@ -18,7 +18,7 @@ class Iqiyi {
 
         Common.listHandle(
             /(^http:\/\/(www|vip|so)\.iqiyi\.com)*\/(v_|a_|dianying|so|\d+)/i,
-            '.search_result_side li, .wrapper-piclist[data-widget-listviptip] li, .mod-topList li, #teleplayChannel li, .wrapper-cols[data-block-name] li, .site-main-outer li',
+            '.search_result_side li, .wrapper-piclist[data-widget-listviptip] li, .mod-topList li, #teleplayChannel li, .wrapper-cols[data-block-name] li, .site-main-outer li, #block-F[data-relate-widget] li, #block-G[data-like-widget] li, #widget-tab-3[data-tabname="fengyunbang"] .site-piclist_pic, #widget-tab-3[data-tabname="fengyunbang"] li, #block-H li',
             'movie'
         );
     }

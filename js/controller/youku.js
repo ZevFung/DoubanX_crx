@@ -20,7 +20,7 @@ class YouKu {
 
         Common.listHandle(
             /^http:\/\/(v|www|i|e)\.youku\.com\/(v_show|show_page|u|v)/i,
-            '.v, #listofficial .item, .yk-col3, .p.ishover, #showpagerelationlist li.p_link',
+            '.v, #listofficial .item, .yk-rank .item, .yk-col3, .p.ishover, #showpagerelationlist li.p_link',
             'movie'
         );
     }
