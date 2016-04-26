@@ -232,7 +232,7 @@ class Template {
         average = data.rating.average === 0 ? '' : `<span class="subject-rating">${Number(data.rating.average).toFixed(1)}</span>`;
 
 
-        return `<div id="subject-tip">
+        return `<div id="subject-tip" class="subject-tip-movie">
                     <div class="rating_logo">豆瓣简介</div>
                     <div class="subject-tip-hd">
                         <h3>${title}<span class="release-year">${data.year}</span></h3>
@@ -255,8 +255,52 @@ class Template {
     /**
      * 渲染图书简介
      */
-     renderBookIntro() {
+    renderBookIntro() {
+        const data = this.data;
+        let author = '';
+        let title = `${data.title} ${data.subtitle}`;
+        let translator = '';
+        let publisher = '';
+        let pubdate = '';
+        let summary = '';
 
+        author = data.author.join(' / ');
+        author = author !== '' ? `<li>
+                                     <span class="douban-label">作者：</span>
+                                     <span>${author}</span>
+                                 </li>` : '';
+
+        translator = data.translator.join(' / ');
+        translator = translator !== '' ? `<li>
+                                             <span class="douban-label">译者：</span>
+                                             <span>${translator}</span>
+                                         </li>` : '';
+        publisher = data.publisher !== '' ? `<li>
+                                                 <span class="douban-label">出版社：</span>
+                                                 <span>${data.publisher}</span>
+                                             </li>` : '';
+        pubdate = data.pubdate !== '' ? `<li>
+                                             <span class="douban-label">出版时间：</span>
+                                             <span>${data.pubdate}</span>
+                                         </li>` : '';
+        summary = data.summary !== '' ? `<p>${data.summary}</p>` : '';
+
+
+        return `<div id="subject-tip" class="subject-tip-book">
+                    <div class="rating_logo">豆瓣简介</div>
+                    <div class="subject-tip-hd">
+                        <h3>${title}</h3>
+                    </div>
+                    <div class="subject-tip-bd">
+                        <ul>
+                            ${author}
+                            ${translator}
+                            ${publisher}
+                            ${pubdate}
+                        </ul>
+                        ${summary}
+                    </div>
+                </div>`;
      }
 
      /**
