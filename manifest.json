@@ -48,6 +48,7 @@
                 "http://www.amazon.cn/*",
                 "https://www.amazon.cn/*",
 
+                "http://www.dangdang.com/*",
                 "http://product.dangdang.com/*",
                 "http://book.dangdang.com/*",
                 "http://v.dangdang.com/*",
@@ -142,6 +143,7 @@
         },
         {
             "matches": [
+                "http://www.dangdang.com/*",
                 "http://product.dangdang.com/*",
                 "http://book.dangdang.com/*",
                 "http://v.dangdang.com/*",
