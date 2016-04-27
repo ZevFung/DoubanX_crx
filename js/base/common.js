@@ -13,6 +13,16 @@ class Common {
                 $target.data('movein', false);
                 setTimeout(() => {
                     if ($target.data('allow')) {
+                        const name = $.trim($link.attr('title')) ||
+                                    $.trim($link.find('img').attr('alt')) ||
+                                    $.trim($link.find('.title').text()) ||
+                                    $.trim($link.find('.info h2').text()) ||
+                                    $.trim($target.find('.p_bt a').text()) ||
+                                    $.trim($target.find('.title a').text()) ||
+                                    $.trim($target.find('.p-name a em').text()) ||
+                                    $.trim($link.text());
+                        if (name === '') {return;}
+
                         if ($target.data('loading')) {
                             new Template().showTips($target, 'loading');
                             return;
@@ -21,13 +31,7 @@ class Common {
                         $target.data('loading', true);
                         new Template().showTips($target, 'loading');
                         new DoubanX({
-                            name: $.trim($link.attr('title')) ||
-                                  $.trim($link.find('img').attr('alt')) ||
-                                  $.trim($link.find('.title').text()) ||
-                                  $.trim($link.find('.info h2').text()) ||
-                                  $.trim($target.find('.p_bt a').text()) ||
-                                  $.trim($target.find('.title a').text()) ||
-                                  $.trim($link.text()),
+                            name: name,
                             type: type
                         }).getIntro((data) => {
                             $target.data('allow', true);

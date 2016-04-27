@@ -32,6 +32,12 @@ class JD {
                 type: 'book'
             }).getRate();
         }
+
+        Common.listHandle(
+            /^\/\/(item|e)\.jd\.com\/\d*\.html/i,
+            '.ui-switchable-panel li, .book-product li, #plist li, .m-list li, .book-items li',
+            'book'
+        );
     }
 }
 

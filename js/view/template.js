@@ -258,12 +258,13 @@ class Template {
     renderBookIntro() {
         const data = this.data;
         let author = '';
-        let title = `${data.title} ${data.subtitle}`;
+        let title = '';
         let translator = '';
         let publisher = '';
         let pubdate = '';
         let summary = '';
 
+        title = data.title === data.subtitle ? data.title : `${data.title} ${data.subtitle}`;
         author = data.author.join(' / ');
         author = author !== '' ? `<li>
                                      <span class="douban-label">作者：</span>
