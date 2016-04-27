@@ -15,11 +15,13 @@ class Common {
                     if ($target.data('allow')) {
                         const name = $.trim($link.attr('title')) ||
                                     $.trim($link.find('img').attr('alt')) ||
+                                    $.trim($link.find('img').attr('title')) ||
                                     $.trim($link.find('.title').text()) ||
                                     $.trim($link.find('.info h2').text()) ||
                                     $.trim($target.find('.p_bt a').text()) ||
                                     $.trim($target.find('.title a').text()) ||
                                     $.trim($target.find('.p-name a em').text()) ||
+                                    $.trim($target.find('dt.p-name a').text()) ||
                                     $.trim($link.text());
                         if (name === '') {return;}
 

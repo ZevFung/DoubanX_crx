@@ -35,7 +35,7 @@ class JD {
 
         Common.listHandle(
             /^\/\/(item|e)\.jd\.com\/\d*\.html/i,
-            '.ui-switchable-panel li, .book-product li, #plist li, .m-list li, .book-items li',
+            '.ui-switchable-panel li, .book-product li, #plist li, .m-list li, .book-items li, .tabcon li, .tabcon .item',
             'book'
         );
     }

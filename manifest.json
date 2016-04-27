@@ -60,11 +60,13 @@
                 "http://e.jd.com/*",
                 "http://book.jd.com/*",
                 "http://list.jd.com/*",
+                "http://search.e.jd.com/*",
                 "https://item.jd.com/*",
                 "https://re.jd.com/cps/item/*",
                 "https://e.jd.com/*",
                 "https://book.jd.com/*",
-                "https://list.jd.com/*"
+                "https://list.jd.com/*",
+                "https://search.e.jd.com/*"
             ],
             "css": [
                 "css/doubanx.css"
@@ -169,11 +171,13 @@
                 "http://e.jd.com/*",
                 "http://book.jd.com/*",
                 "http://list.jd.com/*",
+                "http://search.e.jd.com/*",
                 "https://item.jd.com/*",
                 "https://re.jd.com/cps/item/*",
                 "https://e.jd.com/*",
                 "https://book.jd.com/*",
-                "https://list.jd.com/*"
+                "https://list.jd.com/*",
+                "https://search.e.jd.com/*"
             ],
             "js": [
                 "js/controller/jd.js"
