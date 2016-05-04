@@ -16,8 +16,8 @@ class Template {
     showRate() {
         const $body = $('body');
         $body.append(this.renderRate());
-        const $rate = $('#interest_sectl');
-        $body.on('click', '.interest_close', (ev) => {
+        const $rate = $('#doubanx_sectl');
+        $body.on('click', '.doubanx_close', (ev) => {
             ev.preventDefault();
             $rate.toggleClass('animated fadeOutRightBig');
             setTimeout(() => {
@@ -34,7 +34,7 @@ class Template {
      * 显示豆瓣评论
      */
     showReview(data) {
-        const $rate = $('#interest_sectl');
+        const $rate = $('#doubanx_sectl');
         $rate.append(this.renderReview());
         const windowH = $(window).height();
         const doubanH = $rate.height();
@@ -73,7 +73,7 @@ class Template {
             default:
         }
 
-        $('#subject-tip').remove();
+        $('#doubanx-subject-tip').remove();
         const $body = $('body');
 
         $body.append(renderOutput);
@@ -84,7 +84,7 @@ class Template {
         const listW = $list.width();
         const listH = $list.height();
 
-        const $tips = $('#subject-tip');
+        const $tips = $('#doubanx-subject-tip');
         const tipsW = $tips.width();
         const tipsH = $tips.height();
 
@@ -112,51 +112,51 @@ class Template {
     renderRate() {
         const data = this.data;
         if (data.vote > 10) {
-            return `<div id="interest_sectl" class="animated fadeInRightBig">
-                        <a href="javascript:;" class="interest_close"></a>
+            return `<div id="doubanx_sectl" class="animated fadeInRightBig">
+                        <a href="javascript:;" class="doubanx_close"></a>
                         <div class="rating_wrap clearbox">
-                            <div class="rating_logo">豆瓣评分</div>
+                            <div class="doubanx-rating-logo">豆瓣评分</div>
                             <div class="rating_self clearfix">
                                 <strong class="ll rating_num">${data.average}</strong>
                                 <div class="rating_right">
-                                    <div class="ll bigstar${data.star}"></div>
+                                    <div class="ll doubanx_star${data.star}"></div>
                                     <div class="rating_sum">
                                         <a href="https://${data.type}.douban.com/subject/${data.id}/collections" class="rating_people" target="_blank"><span>${data.vote}</span>人评价</a>
                                     </div>
                                 </div>
                             </div>
-                            <span class="stars5 starstop" title="力荐">5星</span>
+                            <span class="doubanx_stars5 doubanx_starstop" title="力荐">5星</span>
                             <div class="power" style="width:${data.rate[0]*80/100}px"></div>
                             <span class="rating_per">${data.rate[0]}%</span>
                             <br>
-                            <span class="stars4 starstop" title="推荐">4星</span>
+                            <span class="doubanx_stars4 doubanx_starstop" title="推荐">4星</span>
                             <div class="power" style="width:${data.rate[1]*80/100}px"></div>
                             <span class="rating_per">${data.rate[1]}%</span>
                             <br>
-                            <span class="stars3 starstop" title="还行">3星</span>
+                            <span class="doubanx_stars3 doubanx_starstop" title="还行">3星</span>
                             <div class="power" style="width:${data.rate[2]*80/100}px"></div>
                             <span class="rating_per">${data.rate[2]}%</span>
                             <br>
-                            <span class="stars2 starstop" title="较差">2星</span>
+                            <span class="doubanx_stars2 doubanx_starstop" title="较差">2星</span>
                             <div class="power" style="width:${data.rate[3]*80/100}px"></div>
                             <span class="rating_per">${data.rate[3]}%</span>
                             <br>
-                            <span class="stars1 starstop" title="很差">1星</span>
+                            <span class="doubanx_stars1 doubanx_starstop" title="很差">1星</span>
                             <div class="power" style="width:${data.rate[4]*80/100}px"></div>
                             <span class="rating_per">${data.rate[4]}%</span>
                             <br>
                         </div>
                     </div>`;
         } else {
-            return `<div id="interest_sectl" class="animated fadeInRightBig">
-                        <a href="javascript:;" class="interest_close"></a>
+            return `<div id="doubanx_sectl" class="animated fadeInRightBig">
+                        <a href="javascript:;" class="doubanx_close"></a>
                         <div class="rating_wrap clearbox">
-                            <div class="rating_logo">豆瓣评分</div>
+                            <div class="doubanx-rating-logo">豆瓣评分</div>
                             <div class="rating_self clearfix">
                                 <strong class="ll rating_num"></strong>
                                 <span content="10.0"></span>
                                 <div class="rating_right not_showed">
-                                    <div class="ll bigstar00"></div>
+                                    <div class="ll doubanx_star00"></div>
                                     <div class="rating_sum">
                                         <a href="https://${data.type}.douban.com/subject/${data.id}/collections" target="_blank">评价人数不足</a>
                                     </div>
@@ -180,8 +180,8 @@ class Template {
                         </p>
                     </li>`;
         });
-        return `<div id="comment-list-wrapper" class="indent animated fadeIn">
-                    <div class="rating_logo">豆瓣热评</div>
+        return `<div id="doubanx-comment" class="indent animated fadeIn">
+                    <div class="doubanx-rating-logo">豆瓣热评</div>
                     <div class="comment-list">
                         <ul>
                             ${list}
@@ -232,17 +232,17 @@ class Template {
         average = data.rating.average === 0 ? '' : `<span class="subject-rating">${Number(data.rating.average).toFixed(1)}</span>`;
 
 
-        return `<div id="subject-tip" class="subject-tip-movie">
-                    <div class="rating_logo">豆瓣简介</div>
-                    <div class="subject-tip-hd">
-                        <h3>${title}<span class="release-year">${data.year}</span></h3>
-                        <p class="douban-star">
-                            <span class="subject-star bigstar${data.rating.stars}"></span>
+        return `<div id="doubanx-subject-tip" class="doubanx-subject-tip-movie">
+                    <div class="doubanx-rating-logo">豆瓣简介</div>
+                    <div class="doubanx-subject-tip-hd">
+                        <h3>${title}<span class="doubanx-release-year">${data.year}</span></h3>
+                        <p class="doubanx-douban-star">
+                            <span class="doubanx-subject-star doubanx_star${data.rating.stars}"></span>
                             ${average}
-                            <span class="rater-num">(${data.collect_count}人评价)</span>
+                            <span class="doubanx-rater-num">(${data.collect_count}人评价)</span>
                         </p>
                     </div>
-                    <div class="subject-tip-bd">
+                    <div class="doubanx-subject-tip-bd">
                         <ul>
                             ${genres}
                             ${directors}
@@ -287,12 +287,12 @@ class Template {
         summary = data.summary !== '' ? `<p>${data.summary}</p>` : '';
 
 
-        return `<div id="subject-tip" class="subject-tip-book">
-                    <div class="rating_logo">豆瓣简介</div>
-                    <div class="subject-tip-hd">
+        return `<div id="doubanx-subject-tip" class="doubanx-subject-tip-book">
+                    <div class="doubanx-rating-logo">豆瓣简介</div>
+                    <div class="doubanx-subject-tip-hd">
                         <h3>${title}</h3>
                     </div>
-                    <div class="subject-tip-bd">
+                    <div class="doubanx-subject-tip-bd">
                         <ul>
                             ${author}
                             ${translator}
@@ -304,13 +304,13 @@ class Template {
                 </div>`;
      }
 
-     /**
-      * 渲染错误
-      */
+    /**
+     * 渲染错误
+     */
     renderErrorIntro() {
-        return `<div id="subject-tip">
-                    <div class="rating_logo">豆瓣简介</div>
-                    <div class="subject-tip-hd">
+        return `<div id="doubanx-subject-tip">
+                    <div class="doubanx-rating-logo">豆瓣简介</div>
+                    <div class="doubanx-subject-tip-hd">
                         <h3>暂无数据 :(</h3>
                     </div>
                 </div>`;
@@ -320,8 +320,8 @@ class Template {
      * 渲染简介前的Loading
      */
     renderLoadIntro() {
-        return `<div id="subject-tip">
-                    <div class="rating_logo">
+        return `<div id="doubanx-subject-tip">
+                    <div class="doubanx-rating-logo">
                         豆瓣影视图书小助手正努力搜索中...
                     </div>
                     <div class="loader-inner pacman">

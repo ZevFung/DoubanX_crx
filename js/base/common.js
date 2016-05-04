@@ -22,6 +22,7 @@ class Common {
                                     $.trim($target.find('.title a').text()) ||
                                     $.trim($target.find('.p-name a em').text()) ||
                                     $.trim($target.find('dt.p-name a').text()) ||
+                                    $.trim($target.find('dd a').text()) ||
                                     $.trim($link.text());
                         if (name === '') {return;}
 
@@ -62,7 +63,7 @@ class Common {
             if (reg.test(href)) {
                 $target.data('allow', false);
                 $target.data('movein', true);
-                $('#subject-tip').remove();
+                $('#doubanx-subject-tip').remove();
             }
         });
     }
