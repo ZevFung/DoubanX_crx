@@ -5,7 +5,7 @@ class Douban {
     main() {
         Common.listHandle(
             /^https:\/\/movie\.douban\.com\/subject\/\d*/i,
-            '.recommendations-bd dl, .list-s li, #billboard tr',
+            '.recommendations-bd dl, .list-s li, #billboard tr, .movie_top li, #douban-top250 dl',
             'movie'
         );
         Common.listHandle(
