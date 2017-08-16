@@ -11,36 +11,6 @@ class DoubanX {
         // localStorage.clear();
     }
 
-    /**
-     * 格式化标题
-     */
-    static formatName(name) {
-        const num = ['一', '二', '三', '四', '五',
-                     '六', '七', '八', '九', '十'];
-        return name.trim()
-                .replace(/《(.*)》(第.?季)/i, "$1 $2") // 美剧名格式化
-                .replace(/(.*)?第(\d*)?季/i, ($1, $2, $3) => {
-                    return $2 + ' 第' + num[$3-1] + '季';
-                })                                   // 美剧名格式化
-                .replace(/(.*)《(.*)》(.*)/i, "$2")   // 取书名号内容
-                .replace(/(\(.*\))/i, "")            // 去掉英文括号
-                .replace(/(.*)：.*/i, "$1")
-                .replace(/(.*)?(（.*）)$/i, "$1")     // 去掉中文括号里的内容
-                .replace(/(.*)?(第.*?集)/i, "$1")     // 电视剧名格式化
-                .replace(/<(.*)>(.*)/i, "$1")
-                .replace(/【.*】(.*)/i, "$1")
-                .replace(/(.*)\[.*\]/i, "$1")
-                .replace(/(.*)(-.*卫视)/i, "$1");
-    }
-
-    /**
-     * 格式化数据
-     */
-    static formatData(data) {
-        data.rate = JSON.parse(data.rate);
-
-        return data;
-    }
 
     /**
      * 实时获取
@@ -84,10 +54,10 @@ class DoubanX {
     getRateOnline(callback) {
         const key = `${this.name}_${this.type}_rate`;
         const url = this.api.getRate;
-        const params = `name=${DoubanX.formatName(this.name)}&type=${this.type}`;
+        const params = `name=${Filter.formatName(this.name)}&type=${this.type}`;
 
         this.getOnline(key, url, params, (data) => {
-            callback(DoubanX.formatData(data.data));
+            callback(Filter.formatData(data.data));
         });
     }
 
@@ -187,7 +157,7 @@ class DoubanX {
     getIntroOnline(callback, error) {
         const key = `${this.name}_${this.type}_intro`;
         const url = this.api.getIntro;
-        const params = `name=${DoubanX.formatName(this.name)}&type=${this.type}`;
+        const params = `name=${Filter.formatName(this.name)}&type=${this.type}`;
 
         this.getOnline(key, url, params, (data) => {
             callback(data.data);

@@ -1,13 +1,7 @@
 class Template {
     constructor(data) {
         this.data = data || {};
-    }
-
-    /**
-     * 数字千分位格式化
-     */
-    static toThousands(num) {
-        return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, "$1,");
+        this.events();
     }
 
     /**
@@ -48,63 +42,7 @@ class Template {
         }
     }
 
-    /**
-     * 显示简介浮层
-     */
-    showTips($list, type) {
-        let renderOutput = '';
-        switch (type) {
-            case 'loading':
-                renderOutput = this.renderLoadIntro();
-                break;
 
-            case 'error':
-                renderOutput = this.renderErrorIntro();
-                break;
-
-            case 'movie':
-                renderOutput = this.renderMovieIntro();
-                break;
-
-            case 'book':
-                renderOutput = this.renderBookIntro();
-                break;
-
-            default:
-        }
-
-        $('#doubanx-subject-tip').remove();
-        const $body = $('body');
-
-        $body.append(renderOutput);
-        const bodyW = $body.width();
-
-        const listT = $list.offset().top;
-        const listL = $list.offset().left;
-        const listW = $list.width();
-        const listH = $list.height();
-
-        const $tips = $('#doubanx-subject-tip');
-        const tipsW = $tips.width();
-        const tipsH = $tips.height();
-
-        if (bodyW - (listW + listL) > tipsW)
-        // 优先在右侧展示
-        {
-            $tips.css({
-                top: listT,
-                left: listW + listL
-            });
-        }
-        // 其次在左侧展示
-        else if (listL > tipsW)
-        {
-            $tips.css({
-                top: listT,
-                left: listL - tipsW
-            });
-        }
-    }
 
     /**
      * 渲染评分模板
@@ -194,10 +132,71 @@ class Template {
     }
 
     /**
+     * 自定义事件
+     */
+    events() {
+        $('body')
+            .on('doubanx:mouseout', () => {
+            })
+            .on('doubanx:showTips', () => {
+            });
+    }
+
+    /**
+     * 渲染图书简介
+     */
+    static renderBookIntro(data) {
+        let author = '';
+        let title = '';
+        let translator = '';
+        let publisher = '';
+        let pubdate = '';
+        let summary = '';
+
+        title = data.title === data.subtitle ? data.title : `${data.title} ${data.subtitle}`;
+        author = data.author.join(' / ');
+        author = author !== '' ? `<li>
+                                     <span class="douban-label">作者：</span>
+                                     <span>${author}</span>
+                                 </li>` : '';
+
+        translator = data.translator.join(' / ');
+        translator = translator !== '' ? `<li>
+                                             <span class="douban-label">译者：</span>
+                                             <span>${translator}</span>
+                                         </li>` : '';
+        publisher = data.publisher !== '' ? `<li>
+                                                 <span class="douban-label">出版社：</span>
+                                                 <span>${data.publisher}</span>
+                                             </li>` : '';
+        pubdate = data.pubdate !== '' ? `<li>
+                                             <span class="douban-label">出版时间：</span>
+                                             <span>${data.pubdate}</span>
+                                         </li>` : '';
+        summary = data.summary !== '' ? `<p>${data.summary}</p>` : '';
+
+
+        return `<div id="doubanx-subject-tip" class="doubanx-subject-tip-book">
+                    <div class="doubanx-rating-logo">豆瓣简介</div>
+                    <div class="doubanx-subject-tip-hd">
+                        <h3>${title}</h3>
+                    </div>
+                    <div class="doubanx-subject-tip-bd">
+                        <ul>
+                            ${author}
+                            ${translator}
+                            ${publisher}
+                            ${pubdate}
+                        </ul>
+                        ${summary}
+                    </div>
+                </div>`;
+     }
+
+    /**
      * 渲染电影简介
      */
-    renderMovieIntro() {
-        const data = this.data;
+    static renderMovieIntro(data) {
         let title = '';
         let genres = '';
         let directors = '';
@@ -253,61 +252,9 @@ class Template {
     }
 
     /**
-     * 渲染图书简介
-     */
-    renderBookIntro() {
-        const data = this.data;
-        let author = '';
-        let title = '';
-        let translator = '';
-        let publisher = '';
-        let pubdate = '';
-        let summary = '';
-
-        title = data.title === data.subtitle ? data.title : `${data.title} ${data.subtitle}`;
-        author = data.author.join(' / ');
-        author = author !== '' ? `<li>
-                                     <span class="douban-label">作者：</span>
-                                     <span>${author}</span>
-                                 </li>` : '';
-
-        translator = data.translator.join(' / ');
-        translator = translator !== '' ? `<li>
-                                             <span class="douban-label">译者：</span>
-                                             <span>${translator}</span>
-                                         </li>` : '';
-        publisher = data.publisher !== '' ? `<li>
-                                                 <span class="douban-label">出版社：</span>
-                                                 <span>${data.publisher}</span>
-                                             </li>` : '';
-        pubdate = data.pubdate !== '' ? `<li>
-                                             <span class="douban-label">出版时间：</span>
-                                             <span>${data.pubdate}</span>
-                                         </li>` : '';
-        summary = data.summary !== '' ? `<p>${data.summary}</p>` : '';
-
-
-        return `<div id="doubanx-subject-tip" class="doubanx-subject-tip-book">
-                    <div class="doubanx-rating-logo">豆瓣简介</div>
-                    <div class="doubanx-subject-tip-hd">
-                        <h3>${title}</h3>
-                    </div>
-                    <div class="doubanx-subject-tip-bd">
-                        <ul>
-                            ${author}
-                            ${translator}
-                            ${publisher}
-                            ${pubdate}
-                        </ul>
-                        ${summary}
-                    </div>
-                </div>`;
-     }
-
-    /**
      * 渲染错误
      */
-    renderErrorIntro() {
+    static renderErrorIntro() {
         return `<div id="doubanx-subject-tip">
                     <div class="doubanx-rating-logo">豆瓣简介</div>
                     <div class="doubanx-subject-tip-hd">
@@ -319,7 +266,7 @@ class Template {
     /**
      * 渲染简介前的Loading
      */
-    renderLoadIntro() {
+    static renderLoadIntro() {
         return `<div id="doubanx-subject-tip">
                     <div class="doubanx-rating-logo">
                         豆瓣影视图书小助手正努力搜索中...
@@ -332,5 +279,71 @@ class Template {
                         <div></div>
                     </div>
                 </div>`;
+    }
+
+    static renderTips($target, content) {
+        Template.hideTips();
+        const $body = $('body');
+
+        $body.append(content);
+        const bodyW = $body.width();
+
+        const listT = $target.offset().top;
+        const listL = $target.offset().left;
+        const listW = $target.width();
+        const listH = $target.height();
+
+        const $tips = $('#doubanx-subject-tip');
+        const tipsW = $tips.width();
+        const tipsH = $tips.height();
+
+        if (bodyW - (listW + listL) > tipsW)
+        // 优先在右侧展示
+        {
+            $tips.css({
+                top: listT,
+                left: listW + listL
+            });
+        }
+        // 其次在左侧展示
+        else if (listL > tipsW)
+        {
+            $tips.css({
+                top: listT,
+                left: listL - tipsW
+            });
+        }
+    }
+
+    static showLoadingTips($target) {
+        const content = Template.renderLoadIntro();
+        Template.renderTips($target, content);
+    }
+
+    static showErrorTips($target) {
+        const content = Template.renderErrorIntro();
+        Template.renderTips($target, content);
+    }
+
+    /**
+     * 显示简介浮层
+     */
+    static showTips($target, type, data) {
+        let content = '';
+
+        if (type === 'movie') {
+            content = Template.renderMovieIntro(data);
+        } else if (type === 'book') {
+            content = Template.renderBookIntro(data);
+        }
+
+        Template.renderTips($target, content);
+    }
+
+    /**
+     * 隐藏简介浮层
+     */
+    static hideTips() {
+        $('#doubanx-subject-tip').remove();
     }
 }
