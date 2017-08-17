@@ -6,7 +6,8 @@ class DoubanX {
         this.api = {
             getRate: `${this.origin}/get_rate`,
             getReview: `${this.origin}/get_review`,
-            getIntro: `${this.origin}/get_intro`
+            getIntro: `${this.origin}/get_intro`,
+            getRules: `${this.origin}/get_rules`
         };
         // localStorage.clear();
     }
@@ -180,5 +181,20 @@ class DoubanX {
                 callback(intro);
             }, error);
         }
+    }
+
+    getRulesOnline(callback, error) {
+        const key = `${this.origin}_rules`;
+        const url = this.api.getRules;
+        const params = '';
+        this.getOnline(key, url, params, (data) => {
+            callback(data.data);
+        }, error);
+    }
+
+    getRules() {
+        this.getRulesOnline((rules) => {
+            callback(data.data);
+        }, error);
     }
 }
