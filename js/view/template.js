@@ -1,7 +1,6 @@
 class Template {
     constructor(data) {
         this.data = data || {};
-        this.events();
     }
 
     /**
@@ -129,17 +128,6 @@ class Template {
                         <a href="https://${data.rate.type}.douban.com/subject/${data.rate.id}/reviews" class="comment-more" target="_blank">查看更多评论&raquo;</a>
                     </div>
                 </div>`;
-    }
-
-    /**
-     * 自定义事件
-     */
-    events() {
-        $('body')
-            .on('doubanx:mouseout', () => {
-            })
-            .on('doubanx:showTips', () => {
-            });
     }
 
     /**

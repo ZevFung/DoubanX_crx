@@ -5,12 +5,12 @@ class Amazon extends Base {
 }
 
 new Amazon([{
-    match: document.querySelector('#productTitle') !== null,
+    match: $('#productTitle').length !== 0,
     tag: '#productTitle',
     type: 'book',
     event: 'pageload'
 }, {
-    match: document.querySelector('#ebooksProductTitle') !== null,
+    match: $('ebooksProductTitle').length !== 0,
     tag: '#ebooksProductTitle',
     type: 'book',
     event: 'pageload'
@@ -21,7 +21,7 @@ new Amazon([{
     event: 'mouseover'
 }, {
     match: /\/dp\//i,
-    tag: '.a-carousel-card, #recentlyViewed td.text, .ch-tabwidget-pc-contentAsin, .feed-carousel-card, .a-fixed-left-grid-col .a-link-normal',
+    tag: '.a-carousel-card, #recentlyViewed td.text, .ch-tabwidget-pc-contentAsin, .feed-carousel-card, .a-fixed-left-grid-col .a-link-normal, .a-unordered-list .a-link-normal, .acsUxWidget .bxc-grid__column',
     type: 'book',
     event: 'mouseover'
 }]);
