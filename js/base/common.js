@@ -30,12 +30,10 @@ class Base {
     }
 
     handlePageload(tag, type) {
-        const name = $(tag).html().match(/97[89]\d{9}[xX\d]/);
+        const isbn = $(tag).html().match(/97[89]\d{9}[xX\d]/);
+        const name = isbn ? isbn[0] : $.trim($(tag).text());
         if (name) {
-            new DoubanX({
-                name: name[0],
-                type: type
-            }).getRate();
+            new DoubanX({name, type}).getRate();
         }
     }
 

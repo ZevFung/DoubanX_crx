@@ -183,8 +183,11 @@ class DoubanX {
         }
     }
 
+    /**
+     * 实时获取规则
+     */
     getRulesOnline(callback, error) {
-        const key = `${this.origin}_rules`;
+        const key = `${location.host}_rules`;
         const url = this.api.getRules;
         const params = `host=${location.host}`;
         this.getOnline(key, url, params, (data) => {
@@ -192,9 +195,34 @@ class DoubanX {
         }, error);
     }
 
+    /**
+     * 从缓存中获取规则
+     */
+    getRulesOffline(callback) {
+        const key = `${location.host}_rules`;
+        return this.getOffline(key, (data) => {
+            callback(data);
+        });
+    }
+
+    /**
+     * 获取规则
+     */
     getRules(callback, error) {
-        this.getRulesOnline((rules) => {
+        const that = this;
+        // 优先读取缓存
+        const inCache = that.getRulesOffline((rules) => {
             callback(rules);
+        });
+
+        // 每次都更新缓存
+        this.getRulesOnline((rules) => {
+            // 如果没有缓存
+            if (!inCache) {
+                callback(rules);
+            } else {
+                localStorage.setItem(`${location.host}_rules`, JSON.stringify(rules));
+            }
         }, error);
     }
 }
