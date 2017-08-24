@@ -6,11 +6,12 @@ class Base {
         this.init(list);
     }
 
-    init(list) {
+    init(list = []) {
         list.forEach((val, key) => {
+            const valMatch = eval(val.match);
             if (
                 val.event === 'pageload' &&
-                val.match &&
+                valMatch &&
                 val.tag &&
                 val.type
             ) {
@@ -19,11 +20,11 @@ class Base {
 
             if (
                 val.event === 'mouseover' &&
-                val.match instanceof RegExp &&
+                valMatch instanceof RegExp &&
                 val.tag &&
                 val.type
             ) {
-                this.handleMouseover(val.match, val.tag, val.type);
+                this.handleMouseover(valMatch, val.tag, val.type);
             }
         });
     }

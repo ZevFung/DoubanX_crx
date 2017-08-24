@@ -186,15 +186,15 @@ class DoubanX {
     getRulesOnline(callback, error) {
         const key = `${this.origin}_rules`;
         const url = this.api.getRules;
-        const params = '';
+        const params = `host=${location.host}`;
         this.getOnline(key, url, params, (data) => {
             callback(data.data);
         }, error);
     }
 
-    getRules() {
+    getRules(callback, error) {
         this.getRulesOnline((rules) => {
-            callback(data.data);
+            callback(rules);
         }, error);
     }
 }
