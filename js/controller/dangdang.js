@@ -6,7 +6,7 @@ class Dangdang extends Base {
 
 new Dangdang([{
     match: $.trim($('.breadcrumb a').eq(0).text()) === '图书' && $('.name_info h1').length !== 0,
-    tag: '.name_info h1',
+    tag: '#detail_describe',
     type: 'book',
     event: 'pageload'
 }, {

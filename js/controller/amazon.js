@@ -6,7 +6,7 @@ class Amazon extends Base {
 
 new Amazon([{
     match: $('#productTitle').length !== 0,
-    tag: '#productTitle',
+    tag: '#detail_bullets_id',
     type: 'book',
     event: 'pageload'
 }, {

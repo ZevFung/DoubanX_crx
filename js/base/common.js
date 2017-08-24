@@ -29,9 +29,12 @@ class Base {
     }
 
     handlePageload(tag, type) {
-        const name = $.trim($(tag).text());
+        const name = $(tag).html().match(/97[89]\d{9}[xX\d]/);
         if (name) {
-            new DoubanX({name, type}).getRate();
+            new DoubanX({
+                name: name[0],
+                type: type
+            }).getRate();
         }
     }
 
