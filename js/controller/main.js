@@ -10,10 +10,11 @@ class Handle {
             if (
                 val.event === 'pageload' &&
                 valMatch &&
-                val.tag &&
+                val.tagIsbn &&
+                val.tagTitle &&
                 val.type
             ) {
-                this.handlePageload(val.tag, val.type);
+                this.handlePageload(val.tagIsbn, val.tagTitle, val.type);
             }
 
             if (
@@ -27,9 +28,9 @@ class Handle {
         });
     }
 
-    handlePageload(tag, type) {
-        const isbn = $(tag).html().match(/97[89]\d{9}[xX\d]/);
-        const name = isbn ? isbn[0] : $.trim($(tag).text());
+    handlePageload(tagIsbn, tagTitle, type) {
+        const isbn = $(tagIsbn).html().match(/97[89]\d{9}[xX\d]/);
+        const name = isbn ? isbn[0] : $.trim($(tagTitle).text());
         if (name) {
             new DoubanX({name, type}).getRate();
         }
