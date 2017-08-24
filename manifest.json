@@ -83,7 +83,6 @@
                 "js/view/template.js",
                 "js/util/filter.js",
                 "js/model/doubanx.js",
-                "js/base/common.js",
                 "js/controller/main.js"
             ]
         }
