@@ -1,4 +1,5 @@
-class Base {
+'use strict';
+class Handle {
     constructor(list) {
         if (typeof DoubanX === 'undefined' || typeof Template === 'undefined') {
             return;
