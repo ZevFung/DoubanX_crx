@@ -50,7 +50,7 @@ class Handle {
             setTimeout(() => {
                 if (!$target.data('allow')) {return;}
                 const name = this.getName($link);
-                if (name === '') {return;}
+                if (name === '' && href === '') {return;}
 
                 // 如果数据还在加载中，直接显示 loading
                 if ($target.data('loading')) {
@@ -128,6 +128,9 @@ class Handle {
                      $target.find('.p-name a em').text() ||
                      $target.find('dt.p-name a').text() ||
                      $target.find('dd a').text() ||
+                     $target.parents('li').find('.p-name a em').text() ||
+                     $target.parents('li').find('.jDesc').text() ||
+                     $target.parents('li').find('h3 a').text() ||
                      $link.text();
         return $.trim(name);
     }
