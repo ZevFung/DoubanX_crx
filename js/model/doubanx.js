@@ -1,7 +1,8 @@
 class DoubanX {
-    constructor(options) {
-        this.name = options.name || '';     // 名称
-        this.type = options.type || '';     // 类型 movie/book
+    constructor({name, type, href}) {
+        this.name = name || '';     // 名称
+        this.type = type || '';     // 类型 movie/book
+        this.href = href || '';     // 链接
         this.origin = '//doubanx.wange.im';
         this.api = {
             getRate: `${this.origin}/get_rate`,
@@ -158,7 +159,7 @@ class DoubanX {
     getIntroOnline(callback, error) {
         const key = `${this.name}_${this.type}_intro`;
         const url = this.api.getIntro;
-        const params = `name=${Filter.formatName(this.name)}&type=${this.type}`;
+        const params = `name=${Filter.formatName(this.name)}&type=${this.type}&href=${encodeURIComponent(this.href)}`;
 
         this.getOnline(key, url, params, (data) => {
             callback(data.data);

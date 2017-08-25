@@ -20,10 +20,10 @@ class Handle {
             if (
                 val.event === 'mouseover' &&
                 valMatch instanceof RegExp &&
-                val.tag &&
+                val.tags &&
                 val.type
             ) {
-                this.handleMouseover(valMatch, val.tag, val.type);
+                this.handleMouseover(valMatch, val.tags.join(', '), val.type);
             }
         });
     }
@@ -64,8 +64,7 @@ class Handle {
                 Template.showLoadingTips($target);
                 // 请求数据
                 new DoubanX({
-                    name: name,
-                    type: type
+                    name, type, href
                 }).getIntro((data) => {
                     $target.data('allow', true);
                     $target.data('loading', false);
@@ -104,7 +103,16 @@ class Handle {
     }
 
     getHref($link) {
-        const href = $.trim($link.attr('href'));
+        let href = $.trim($link.attr('href'));
+        if (href.indexOf('//') === 0) { // 如果以双斜杠开头，则补全协议
+            href = `${location.protocol}${href}`;
+        } else if (href.indexOf('/') === 0) { // 如果以单斜杠开头，则补全域
+            href = `${location.origin}${href}`;
+        } else if (href.indexOf('http') === 0) { // 如果以 http 开头，则什么都不用做
+            href = href;
+        } else { // 其他情况
+            href = `${location.href}${href}`;
+        }
         return href;
     }
 
