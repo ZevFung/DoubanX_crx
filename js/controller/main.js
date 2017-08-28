@@ -30,7 +30,8 @@ class Handle {
 
     handlePageload(tagIsbn, tagTitle, type) {
         const isbn = $(tagIsbn).html().match(/97[89]\d{9}[xX\d]/);
-        const name = isbn ? isbn[0] : $.trim($(tagTitle).text());
+        // const name = isbn ? isbn[0] : $.trim($(tagTitle).text());
+        const name = isbn ? isbn[0] : null;
         if (name) {
             new DoubanX({name, type}).getRate();
         }
