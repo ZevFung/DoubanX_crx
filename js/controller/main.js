@@ -10,7 +10,7 @@ class Handle {
             if (
                 val.event === 'pageload' &&
                 valMatch &&
-                val.tagIsbn &&
+                // val.tagIsbn &&
                 val.tagTitle &&
                 val.type
             ) {
@@ -29,9 +29,14 @@ class Handle {
     }
 
     handlePageload(tagIsbn, tagTitle, type) {
-        const isbn = $(tagIsbn).html().match(/97[89]\d{9}[xX\d]/);
-        // const name = isbn ? isbn[0] : $.trim($(tagTitle).text());
-        const name = isbn ? isbn[0] : null;
+        let name = '';
+        if (type === 'book') {
+            const isbn = $(tagIsbn).html().match(/97[89]\d{9}[xX\d]/);
+            // const name = isbn ? isbn[0] : $.trim($(tagTitle).text());
+            name = isbn ? isbn[0] : null;
+        } else if (type === 'movie') {
+            name = $.trim($(tagTitle).text());
+        }
         if (name) {
             new DoubanX({name, type}).getRate();
         }
@@ -131,7 +136,7 @@ class Handle {
                      $target.find('dd a').text() ||
                      $target.parents('li').find('.p-name a em').text() ||
                      $target.parents('li').find('.jDesc').text() ||
-                     $target.parents('li').find('h3 a').text() ||
+                     $target.parents('li').find('a').eq(1).text() ||
                      $link.text();
         return $.trim(name);
     }
