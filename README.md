@@ -5,12 +5,6 @@
 ## 开发背景
 不知道各位看官有没有这样的痛点，反正我有。就是当我在各大视频网站或者图书网站浏览的时候，我会想知道当前播放的视频或者图书的一个客观评分，比如说豆瓣评分，所以每次我会把当前视频和图书的标题复制到豆瓣上搜一下，看看评分、评星、评论等等再决定要不要继续看这个视频和图书。这是一个重复又费时的操作，为什么不把这个流程做成自动化呢？于是就有了这个 Chrome 扩展。
 
-## 扩展预览
-![DoubanX](http://wange.im/wp-content/uploads/2016/05/1.png)
-![DoubanX](http://wange.im/wp-content/uploads/2016/05/2.png)
-![DoubanX](http://wange.im/wp-content/uploads/2016/05/3.png)
-![DoubanX](http://wange.im/wp-content/uploads/2016/05/4.png)
-
 ## 如何使用
 
 1. 前往 Chrome 网上应用店[下载 DoubanX](https://chrome.google.com/webstore/detail/%E8%B1%86%E7%93%A3%E5%BD%B1%E8%A7%86%E5%9B%BE%E4%B9%A6%E5%B0%8F%E5%8A%A9%E6%89%8B/ioacifoopoldngldmbknimhhophmfbgh?hl=zh-CN)（请自备梯子）。
